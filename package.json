@@ -15,10 +15,15 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@loadable/component": "^5.15.0",
     "gatsby": "^3.11.1",
     "gatsby-plugin-postcss": "^4.11.0",
+    "p5": "^1.4.0",
     "postcss": "^8.3.6",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "react-p5-wrapper": "^2.4.1",
+    "tachyons": "^4.12.0"
   }
 }
