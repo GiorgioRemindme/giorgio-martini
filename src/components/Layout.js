@@ -1,10 +1,10 @@
 import React from 'react'
-import Header from './header'
+import Header from './Header'
 
 const Layout = ({ children }) => {
   return (
     <div className="">
-      <div className="">
+      <div className="center">
         <Header />
         {children}
       </div>
@@ -12,4 +12,4 @@ const Layout = ({ children }) => {
   )
 }
 
-export default Layout 
+export default Layout
