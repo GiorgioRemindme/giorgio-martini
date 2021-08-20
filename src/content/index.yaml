@@ -1,0 +1,8 @@
+- path: "/page1"
+  content:
+    - item: Dancing Lines
+    - item: 120 lines of code, monochromatic
+    - item: DancingLines
+  # links:
+  #   - to: "/page2"
+  #   - to: "/page5"
