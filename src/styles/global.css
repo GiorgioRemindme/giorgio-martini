@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Mono&display=swap');
 
+:root {
+  --pink: #FF6978;
+}
+
 html {
   font-size: 1rem;
   font-family: 'Space Mono';
@@ -13,3 +17,18 @@ body {
 ._pink {
   color: #FF6978;
 }
+
+._minH15 {
+  min-height: 15rem;
+}
+
+a:visited {
+  color: var(--pink);
+}
+
+/* .sketchThumbnail:hover p  {
+  display: block;
+}
+.sketchThumbnail p{
+  display: none;
+} */

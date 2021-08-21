@@ -3,10 +3,11 @@ import Header from './Header'
 
 const Layout = ({ children, isDarkMode }) => {
   return (
-    <div className="mw8 center">
+    <div className="mw8 center layoutWrapper mb5 pb5">
       <div className="center">
         <Header isDarkMode={isDarkMode} />
         {children}
+        {/* <p className="b tc">thisisGiorgio.com</p> */}
       </div>
     </div>
   )

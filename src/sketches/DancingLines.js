@@ -5,10 +5,18 @@ let dancingLine1
 let dancingLine2
 function isOdd(num) { return num % 2;}
 
+
 function Sketch(p5) {
+
+  // React.useRef
+
+  // React.useEffect(() => {
+  //   const canvasWidth = document.getElementById('layoutWrapper').offsetWidth
+  // },[])
   
   p5.setup = () => {
-    p5.createCanvas(p5.windowWidth,p5.windowHeight)
+    
+    p5.createCanvas(800,400)
     p5.background("#18020C")
     dancingLine1 = makeDancingLine(false, p5)
     dancingLine2 = makeDancingLine(true, p5)

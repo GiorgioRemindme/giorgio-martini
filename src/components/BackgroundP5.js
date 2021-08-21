@@ -70,7 +70,7 @@ function Sketch(p5) {
   }
 
   p5.setup = () => {
-    p5.frameRate(1)
+    // p5.frameRate(1)
     canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight/* , p5.WEBGL */)
     p5.background(darkPurple);
     canvas.position(0, 0).style('z-index', '-1')

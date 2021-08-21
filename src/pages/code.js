@@ -1,28 +1,53 @@
 import React from "react";
-import DancingLines from "../sketches/DancingLines";
+import DancingLines from '../sketches/DancingLines'
 import Layout from '../components/Layout'
-import { Link } from "gatsby"
-import "tachyons/css/tachyons.min.css";
-import "../styles/global.css";
+import { Link } from 'gatsby'
+import 'tachyons/css/tachyons.min.css';
+import '../styles/global.css'
+
+import probable from '../images/binaryraon-400x250.jpeg'
+import lines from '../images/0808.png'
+import mosaic from '../images/mosaic.png'
+import fragment from '../images/fragment.png'
 
 const array = [
   {
-    title: "Fragments",
-    img: "https://i.imgur.com/ny6aGBx.jpeg",
-    slug: ""
+    title: "Probable Future",
+    img: probable,
+    link: "/page1"
   },
   {
-    title: "Bits",
-    img: "https://i.imgur.com/q3jFBwq.jpeg"
+    title: "0808",
+    img: lines,
+    link: "/page1"
+  },
+  {
+    title: "Fragment",
+    img: fragment,
+    link: "/page1"
+  },
+  {
+    title: "M0SAIC",
+    img: mosaic,
+    link: "/page1"
+  },
+  {
+    title: "Fragment",
+    img: fragment,
+    link: "/page1"
+  },
+  {
+    title: "M0SAIC",
+    img: mosaic,
+    link: "/page1"
   }
 ]
 
-function SketchThumbnail({ title, img }) {
+function SketchThumbnail({ title, img, link }) {
   return (
-    <a className="pa1">
-      <h2>{title}</h2>
-      <div className="cover" style={{backgroundImage: `url(${img})`}}>
-        yolo
+    <a href={link} className="dim fl w-100 w-33-ns pa0 link">
+      <div className="cover _minH15" style={{backgroundImage: `url(${img})`}}>
+      {/* <p className="f3 tc ma0 pa2">{title}</p> */}
       </div>
     </a>
   )
@@ -31,15 +56,17 @@ function SketchThumbnail({ title, img }) {
 const Code = () => (
   <div className="">
     <Layout isDarkMode={true}>
-      <div className="pt1">
-        <p className="b f-subheadline">I like to programm creative pieces with code.</p>
+      <div className="">
+        <p className="b f-subheadline pb4">Generative, interactive and still images made with code.</p>
+        <div className="cf">
         {array.map(sketch => {
           console.log({sketch})
           return <SketchThumbnail {...sketch} />
         })}
-        <DancingLines />
+        </div>
       </div>
     </Layout>
+    <div className=""></div>
   </div>
 )
 
