@@ -10,7 +10,6 @@ html {
 }
 
 body {
-  /* font-family: sans-serif; */
   font-size: 2rem;
 }
 
@@ -26,9 +25,22 @@ a:visited {
   color: var(--pink);
 }
 
-/* .sketchThumbnail:hover p  {
-  display: block;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(+10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.sketchThumbnail p{
-  display: none;
-} */
+
+.fadeInAnimation {
+  animation: fadeIn linear 0.5s;
+}
+
+#defaultCanvas0 {
+  display: block;
+  margin: 0 auto;
+}

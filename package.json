@@ -24,6 +24,7 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "react-p5-wrapper": "^2.4.1",
+    "react-player": "^2.9.0",
     "tachyons": "^4.12.0"
   }
 }

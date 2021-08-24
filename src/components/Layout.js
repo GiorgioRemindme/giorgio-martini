@@ -1,13 +1,15 @@
 import React from 'react'
 import Header from './Header'
 
-const Layout = ({ children, isDarkMode }) => {
+const Layout = ({ children, isDarkMode, hasFooter = true }) => {
   return (
-    <div className="mw8 center layoutWrapper mb5 pb5">
+    <div className="mw8 center layoutWrapper">
       <div className="center">
         <Header isDarkMode={isDarkMode} />
         {children}
-        {/* <p className="b tc">thisisGiorgio.com</p> */}
+        {hasFooter && (
+          <p className="f4 b tc pt6 mt6">thisisGiorgio.com</p>
+        )}
       </div>
     </div>
   )

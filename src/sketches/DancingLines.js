@@ -16,7 +16,7 @@ function Sketch(p5) {
   
   p5.setup = () => {
     
-    p5.createCanvas(800,400)
+    p5.createCanvas(1024,600)
     p5.background("#18020C")
     dancingLine1 = makeDancingLine(false, p5)
     dancingLine2 = makeDancingLine(true, p5)

@@ -14,12 +14,12 @@ const array = [
   {
     title: "Probable Future",
     img: probable,
-    link: "/page1"
+    link: "/probable-future"
   },
   {
     title: "0808",
     img: lines,
-    link: "/page1"
+    link: "/8080"
   },
   {
     title: "Fragment",
@@ -45,7 +45,7 @@ const array = [
 
 function SketchThumbnail({ title, img, link }) {
   return (
-    <a href={link} className="dim fl w-100 w-33-ns pa0 link">
+    <a href={link} className="dim fl w-100 w-33-ns pa1 link">
       <div className="cover _minH15" style={{backgroundImage: `url(${img})`}}>
       {/* <p className="f3 tc ma0 pa2">{title}</p> */}
       </div>
@@ -57,7 +57,7 @@ const Code = () => (
   <div className="">
     <Layout isDarkMode={true}>
       <div className="">
-        <p className="b f-subheadline pb4">Generative, interactive and still images made with code.</p>
+        <p className="fadeInAnimation b f-subheadline pb4">Generative, interactive and still images made with code.</p>
         <div className="cf">
         {array.map(sketch => {
           console.log({sketch})

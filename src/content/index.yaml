@@ -1,7 +1,12 @@
-- path: "/page1"
+- path: "/probable-future"
   content:
-    - item: Dancing Lines
-    - item: 120 lines of code, monochromatic
+    - item: Probable Future
+    - item: Javascript on HTML canvas. 324 characters. 1FPS. HSL Color mode. Chromatic.
+    - item: ProbableFuture
+- path: "/8080"
+  content:
+    - item: 8080
+    - item: Javascript on HTML canvas. Generative. 232 Characters. 25 FPS. RGB. Chromatic.
     - item: DancingLines
   # links:
   #   - to: "/page2"

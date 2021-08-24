@@ -97,6 +97,7 @@ function Sketch(p5) {
       hovered && s.fade()
 
       spots.forEach(ref => {
+        // set this depending of screen size
         if (between(_x, ref.values()._x-lineThresh, ref.values()._x+lineThresh) && between(_y, ref.values()._y-lineThresh, ref.values()._y+lineThresh)) {
           p5.stroke(color)
           p5.strokeWeight(1)

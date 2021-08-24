@@ -8,7 +8,7 @@ import "../styles/global.css";
 const IndexPage = () => (
     <div className="">
         <Background/>
-        <Layout isDarkMode={false}>
+        <Layout hasFooter={false} isDarkMode={false}>
         <div className="pt1">
           <p className="b white f-subheadline">Hey, I'm Giorgio Martini.</p>
           <p className="b white f-title">I'm a Frontend developer based in Berlin.</p>
