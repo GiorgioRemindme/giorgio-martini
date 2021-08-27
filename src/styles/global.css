@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Space+Mono&display=swap');
-
+/* 
 :root {
   --pink: #FF6978;
-}
+} */
 
 html {
   font-size: 1rem;
@@ -14,7 +14,8 @@ body {
 }
 
 ._pink {
-  color: #FF6978;
+  color: #FF6978 !important;
+  /* try to not use the important */
 }
 
 ._minH15 {
@@ -43,4 +44,28 @@ a:visited {
 #defaultCanvas0 {
   display: block;
   margin: 0 auto;
+}
+
+.sketchThumbnail p{
+  /* figure out variables */
+  transition-duration: 0.2s;
+  /* display: none; */
+  opacity: 0;
+  top: 40%;
+  transform: scale(0.9);
+}
+
+.sketchThumbnail:hover p{
+  display: block;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.sketchThumbnail:hover img{
+  opacity: 0.9;
+  /* filter: brightness(50%); */
+}
+
+.f0 {
+ font-size: 0; 
 }

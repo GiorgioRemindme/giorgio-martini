@@ -5,7 +5,7 @@
     - item: ProbableFuture
 - path: "/8080"
   content:
-    - item: 8080
+    - item: "8080"
     - item: Javascript on HTML canvas. Generative. 232 Characters. 25 FPS. RGB. Chromatic.
     - item: DancingLines
   # links:

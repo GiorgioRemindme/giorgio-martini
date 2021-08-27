@@ -24,16 +24,17 @@ const useScrollTo = id => {
 
 const BasicTemplate = props => {
   let sketch
-  useScrollTo('scrollTo')
   const { pageContext } = props
   const { pageContent } = pageContext
+  useScrollTo('scrollTo')
 
   for (const [key, value] of Object.entries(sketches)) {
-    if (key.toLocaleLowerCase === pageContent[0].item.toLocaleLowerCase) {
-      sketch = value
-    } // else
+    for (let i = 0; i < pageContent.length; i++) {
+      if (pageContent[i].item.toLowerCase() === key.toLowerCase()) {
+        sketch = value
+      }
+    }
   }
-  
 
   return (
     <Layout isDarkMode={false}>
