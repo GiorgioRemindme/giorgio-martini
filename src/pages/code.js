@@ -12,7 +12,7 @@ import fragment from '../images/fragment.png'
 const array = [
   {
     title: "Probable Future",
-    img: lines,
+    img: probable,
     link: "/probable-future"
   },
   {
@@ -22,22 +22,22 @@ const array = [
   },
   {
     title: "Fragment",
-    img: lines,
-    link: "/page1"
+    img: fragment,
+    link: "/fragment"
   },
   {
     title: "M0SAIC",
-    img: lines,
+    img: mosaic,
     link: "/page1"
   },
   {
     title: "Fragment",
-    img: lines,
+    img: probable,
     link: "/page1"
   },
   {
     title: "M0SAIC",
-    img: lines,
+    img: mosaic,
     link: "/page1"
   }
 ]
@@ -45,7 +45,7 @@ const array = [
 function SketchThumbnail({ title, img, link }) {
   return (
     <a href={link} className="f0 sketchThumbnail fl w-100 w-third-ns link">
-      <div className="relative">
+      <div className="relative pa1">
         <img className="w-100" src={img} />
         <p className="b white top-0 tc w-100 absolute f3 tc ma0 pa2">{title}</p>
       </div>

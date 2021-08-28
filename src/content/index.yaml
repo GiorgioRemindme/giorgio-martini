@@ -8,6 +8,11 @@
     - item: "8080"
     - item: Javascript on HTML canvas. Generative. 232 Characters. 25 FPS. RGB. Chromatic.
     - item: DancingLines
+- path: "/fragment"
+  content:
+    - item: Fragment
+    - item: Javascript on HTML canvas. Generative. 232 Characters. 25 FPS. RGB. Chromatic.
+    - item: Fragment
   # links:
   #   - to: "/page2"
   #   - to: "/page5"

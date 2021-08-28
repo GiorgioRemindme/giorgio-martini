@@ -3,7 +3,6 @@ import {loadableP5 as P5Wrapper} from './loadable';
 
 let darkPurple = '#352D39'
 let pink = '#FF6978'
-
 const between = (x, min, max) =>  x >= min && x <= max
 
 function isOverGridPoint (mouseX, mouseY, x, y, range = 20) {
@@ -107,9 +106,12 @@ function Sketch(p5) {
     })
   }
 
-  // p5.mouseClicked = () => {
-  //   console.log(8)
+  // p5.mouseWheel = (event) => {
+  //   console.log(event.delta);
+  //   // uncomment to block page scrolling
+  //   return false;
   // }
+
 }
 
 export default class BackgroundP5 extends Component{

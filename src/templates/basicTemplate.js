@@ -2,11 +2,13 @@ import React, { useLayoutEffect } from "react"
 import { Link } from "gatsby"
 import DancingLines from "../sketches/DancingLines";
 import ProbableFuture from "../sketches/ProbableFuture";
+import Fragment from "../sketches/Fragment";
 import Layout from '../components/Layout'
 
 let sketches = {
   dancingLines: <DancingLines />,
   probableFuture: <ProbableFuture />,
+  fragment: <Fragment />,
 }
 
 // move somewhere...
