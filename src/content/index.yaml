@@ -11,8 +11,18 @@
 - path: "/fragment"
   content:
     - item: Fragment
-    - item: Javascript on HTML canvas. Generative. 232 Characters. 25 FPS. RGB. Chromatic.
+    - item: Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic.
     - item: Fragment
+- path: "/mosaic"
+  content:
+    - item: Mosaic
+    - item: Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic.
+    - item: Mosaic
+- path: "/protocol"
+  content:
+    - item: Protocol
+    - item: Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic.
+    - item: Protocol
   # links:
   #   - to: "/page2"
   #   - to: "/page5"

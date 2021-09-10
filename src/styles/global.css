@@ -46,9 +46,13 @@ a:visited {
   margin: 0 auto;
 }
 
+.sketchThumbnail p, .sketchThumbnail img{
+  transition-duration: 0.1s;
+}
+
 .sketchThumbnail p{
   /* figure out variables */
-  transition-duration: 0.2s;
+  /* transition-duration: 0.2s; */
   /* display: none; */
   opacity: 0;
   top: 40%;
@@ -62,8 +66,8 @@ a:visited {
 }
 
 .sketchThumbnail:hover img{
-  opacity: 0.9;
-  /* filter: brightness(50%); */
+  /* opacity: 0.9; */
+  filter: brightness(70%);
 }
 
 .f0 {

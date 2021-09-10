@@ -3,23 +3,18 @@ import {loadableP5 as P5Wrapper} from '../components/loadable';
 
 let dancingLine1
 let dancingLine2
-function isOdd(num) { return num % 2;}
 
+function isOdd(num) { // TODO move to utils
+  return num % 2;
+}
 
 function Sketch(p5) {
-
-  // React.useRef
-
-  // React.useEffect(() => {
-  //   const canvasWidth = document.getElementById('layoutWrapper').offsetWidth
-  // },[])
   
   p5.setup = () => {
-    
     p5.createCanvas(1024,600)
     p5.background("#18020C")
-    dancingLine1 = makeDancingLine(false, p5)
-    dancingLine2 = makeDancingLine(true, p5)
+    dancingLine1 = dancingLine(false, p5)
+    dancingLine2 = dancingLine(true, p5)
   }
 
   p5.draw = () => {
@@ -30,7 +25,7 @@ function Sketch(p5) {
   }
 }
 
-function makeDancingLine(flip = false, p5) {
+function dancingLine(flip = false, p5) {
   let history = []
   let linesAmt =60
   let col = 255
@@ -84,4 +79,3 @@ export default class DancingLines extends Component{
     return <P5Wrapper sketch={Sketch} />
   }
 }
-

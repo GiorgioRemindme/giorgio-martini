@@ -8,6 +8,7 @@ import probable from '../images/binaryraon-400x250.jpeg'
 import lines from '../images/0808.png'
 import mosaic from '../images/mosaic.png'
 import fragment from '../images/fragment.png'
+import protocol from '../images/protocol.png'
 
 const array = [
   {
@@ -28,12 +29,12 @@ const array = [
   {
     title: "M0SAIC",
     img: mosaic,
-    link: "/page1"
+    link: "/mosaic"
   },
   {
-    title: "Fragment",
-    img: probable,
-    link: "/page1"
+    title: "Protocol",
+    img: protocol,
+    link: "/protocol"
   },
   {
     title: "M0SAIC",
@@ -63,3 +64,7 @@ const Code = () => (
 )
 
 export default Code
+
+// crops
+// poster
+// portrait bW thing

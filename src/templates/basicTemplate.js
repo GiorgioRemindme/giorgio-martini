@@ -1,14 +1,18 @@
 import React, { useLayoutEffect } from "react"
 import { Link } from "gatsby"
+import Layout from '../components/Layout'
 import DancingLines from "../sketches/DancingLines";
 import ProbableFuture from "../sketches/ProbableFuture";
 import Fragment from "../sketches/Fragment";
-import Layout from '../components/Layout'
+import Mosaic from '../sketches/Mosaic'
+import Protocol from '../sketches/protocol'
 
 let sketches = {
   dancingLines: <DancingLines />,
   probableFuture: <ProbableFuture />,
   fragment: <Fragment />,
+  mosaic: <Mosaic />,
+  protocol: <Protocol />,
 }
 
 // move somewhere...
@@ -37,6 +41,8 @@ const BasicTemplate = props => {
       }
     }
   }
+
+  !sketch && console.log("Sketch not found...")
 
   return (
     <Layout isDarkMode={false}>
