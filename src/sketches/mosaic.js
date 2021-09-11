@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import {loadableP5 as P5Wrapper} from '../components/loadable';
 
 let frame
+let canvas 
 let img
 let uploadImg
 let gridAmount = 10
@@ -104,13 +105,16 @@ function Sketch(p5) {
   }
 
   p5.setup = () => {
-    p5.createCanvas(600,600)
+    canvas = p5.createCanvas(600,600)
   }
 
   p5.draw = () => {
     p5.frameCount > 0
-    ? p5.frameRate(0.2)
+    ? p5.frameRate(10)
     : p5.frameRate(1)
+
+    canvas.mouseOver(() => p5.frameRate(0))
+    canvas.mouseOut(() => p5.frameRate(10))
 
   gridAmount = Math.ceil(p5.random(1,15))
   w = p5.width/gridAmount

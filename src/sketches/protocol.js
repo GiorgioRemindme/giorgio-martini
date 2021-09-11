@@ -87,45 +87,28 @@ function Sketch(p5) {
 
   function renderCrop () {
     p5.translate(p5.width / 2, p5.height / 2) 
-
-
     // reset to black
     p5.blendMode(p5.REPLACE) 
     p5.background(0)
-
-
-
     // set to difference to make the ngative space stuff
     p5.blendMode(p5.DIFFERENCE) 
     c1.display()
     c2.display()
     squares.display()
-
-
-
-
-    // p5.filter(p5.INVERT)
     let originalCrops = p5.get()
-
     // reset to black agin
     p5.blendMode(p5.REPLACE) 
     p5.background(0)
     p5.blendMode(p5.REPLACE) 
-    
-    // p5.image(originalCrops, -p5.width / 2, -p5.height / 2)
-    // set to difference to make the ngative space stuff
     p5.blendMode(p5.DIFFERENCE) 
     c1.display()
     c2.display()
     squares.display()
-
-
-    
     p5.filter(p5.INVERT)
     p5.blendMode(p5.DIFFERENCE) 
-    p5.push()
+    // p5.push()
     // p5.image(img, -p5.width/2, -p5.height/2, p5.width, p5.height)
-    p5.pop()
+    // p5.pop()
   }
 
   // p5.preload = () => {
@@ -161,12 +144,11 @@ function Sketch(p5) {
     squares = squares(squaresOpts)
 
     p5.translate(-p5.width / 2, -p5.height / 2) 
-    renderCrop()
-    setInterval(renderCrop, 2000);
+    // setInterval(renderCrop, 2000);
   }
 
   p5.draw = () => {
-
+    renderCrop()
   }
 }
 

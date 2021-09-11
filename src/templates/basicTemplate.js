@@ -4,7 +4,7 @@ import Layout from '../components/Layout'
 import DancingLines from "../sketches/DancingLines";
 import ProbableFuture from "../sketches/ProbableFuture";
 import Fragment from "../sketches/Fragment";
-import Mosaic from '../sketches/Mosaic'
+import Mosaic from '../sketches/mosaic'
 import Protocol from '../sketches/protocol'
 
 let sketches = {
