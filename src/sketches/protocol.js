@@ -57,9 +57,9 @@ function Sketch(p5) {
     let posArray = []
     let animation = 0
     let initialAnimation = animation
-    let maxAnimation = 60
-    let resting = 1
-    let initialResting = 40
+    let maxAnimation = 100
+    let resting = 0
+    let initialResting = 200
    
     function generatePositions() {
       p5.angleMode(p5.DEGREES)
@@ -88,20 +88,25 @@ function Sketch(p5) {
     function display() {
       if (animation < maxAnimation) {
         animation++
-        
+
         posArray.forEach((pos, i) => {
+          // Divide angle into the maxAnimation and then multiply by
+          // animation which increases every frame
           let rotation = pos[0] / maxAnimation * animation
-          console.log("rotation: ", rotation)
+          
+          if (animation === maxAnimation) return
+            
           p5.push()
             p5.rotate(rotation)
             p5.translate(pos[1], 0)
             p5.ellipse(0, 0, r, r)
           p5.pop()
-        })        
+        })
       }
 
       if (animation === maxAnimation ) {
-        resting --
+        resting ++
+
         posArray.forEach((pos, i) => {
           p5.push()
             p5.rotate(pos[0])
@@ -110,9 +115,9 @@ function Sketch(p5) {
           p5.pop()
         })        
 
-        if (resting < 1) {
+        if (resting > initialResting) {
           animation = initialAnimation
-          resting = initialResting
+          resting = 0
           generatePositions()
         }
       }
@@ -151,21 +156,28 @@ function Sketch(p5) {
     // squares = squares(squaresOpts)
     p5.translate(-p5.width / 2, -p5.height / 2) 
     c1.generatePositions()
-    // setInterval(renderCrop, 2000);
+    c2.generatePositions()
   }
 
   p5.draw = () => {
     p5.translate(p5.width / 2, p5.height / 2) 
+    
     // reset to black
     p5.blendMode(p5.REPLACE) 
     p5.background(0)
+    
     // set to difference to make the ngative space stuff
     p5.blendMode(p5.DIFFERENCE) 
     c1.display()
-    // c2.display()
+    c2.display()
     // squares.display()
+    
     p5.filter(p5.INVERT)
   }
+
+  // p5.keyPressed = () => {
+  //   if (p5.keyCode === p5.LEFT_ARROW) p5.noLoop()
+  // }
 }
 
 export default class Protocol extends Component{
