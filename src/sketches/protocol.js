@@ -55,8 +55,11 @@ function Sketch(p5) {
     let angle
     let amt
     let posArray = []
-    let animation = 30
-    let resting = 40
+    let animation = 0
+    let initialAnimation = animation
+    let maxAnimation = 60
+    let resting = 1
+    let initialResting = 40
    
     function generatePositions() {
       p5.angleMode(p5.DEGREES)
@@ -75,6 +78,7 @@ function Sketch(p5) {
       !opts.strokeWeight && p5.fill(color)
       !opts.strokeWeight && p5.noStroke()
       
+      // Fill positions array
       posArray = []
       for (let i = 0; i < amt; i++) {
         posArray.push([angle * i, cropRadius])
@@ -82,31 +86,33 @@ function Sketch(p5) {
     }
 
     function display() {
-      if (animation > 1) {
-        animation --
-
+      if (animation < maxAnimation) {
+        animation++
+        
         posArray.forEach((pos, i) => {
+          let rotation = pos[0] / maxAnimation * animation
+          console.log("rotation: ", rotation)
           p5.push()
-            p5.rotate(pos[0] / animation)
+            p5.rotate(rotation)
             p5.translate(pos[1], 0)
             p5.ellipse(0, 0, r, r)
           p5.pop()
         })        
       }
 
-      if (animation === 1 ) {
+      if (animation === maxAnimation ) {
         resting --
         posArray.forEach((pos, i) => {
           p5.push()
-            p5.rotate(pos[0] / animation)
+            p5.rotate(pos[0])
             p5.translate(pos[1], 0)
             p5.ellipse(0, 0, r, r)
           p5.pop()
         })        
 
         if (resting < 1) {
-          animation = 30
-          resting = 40
+          animation = initialAnimation
+          resting = initialResting
           generatePositions()
         }
       }
