@@ -57,9 +57,10 @@ function Sketch(p5) {
     let posArray = []
     let animation = 0
     let initialAnimation = animation
-    let maxAnimation = 100
+    let maxAnimation = 80
     let resting = 0
-    let initialResting = 200
+    let initialResting = 100
+    let fade = 30
    
     function generatePositions() {
       p5.angleMode(p5.DEGREES)
@@ -87,15 +88,15 @@ function Sketch(p5) {
 
     function display() {
       if (animation < maxAnimation) {
-        animation++
+        animation = animation + 1 * (1 + (animation /10)) // accelerate value
 
         posArray.forEach((pos, i) => {
           // Divide angle into the maxAnimation and then multiply by
           // animation which increases every frame
           let rotation = pos[0] / maxAnimation * animation
-          
-          if (animation === maxAnimation) return
-            
+
+          if (animation >= maxAnimation) return
+
           p5.push()
             p5.rotate(rotation)
             p5.translate(pos[1], 0)
@@ -104,7 +105,7 @@ function Sketch(p5) {
         })
       }
 
-      if (animation === maxAnimation ) {
+      if (animation >= maxAnimation && resting <= initialResting ) {
         resting ++
 
         posArray.forEach((pos, i) => {
@@ -115,12 +116,28 @@ function Sketch(p5) {
           p5.pop()
         })        
 
-        if (resting > initialResting) {
-          animation = initialAnimation
-          resting = 0
-          generatePositions()
-        }
+        // if (resting > initialResting) {
+        //   animation = initialAnimation
+        //   resting = 0
+        //   generatePositions()
+        // }
       }
+
+      if (resting >= initialResting) {
+        fade--
+        
+        posArray.forEach((pos, i) => {
+          let rotation = pos[0] + fade
+          
+          p5.push()
+            p5.rotate(rotation)
+            p5.translate(pos[1], 0)
+            p5.ellipse(0, 0, r, r)
+          p5.pop()
+        })  
+
+      }
+
     }    
 
     return {
