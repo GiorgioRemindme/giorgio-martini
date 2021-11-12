@@ -14,8 +14,8 @@ const Music = () => (
         <div className="cf">
           <div className="fl w-100 w-50-ns pa0">
             <p className="ma0 pr4">
-              From traditional electronic music to pure sound design and unorthodox rhythms,
-              I like  to create music that is a bit unconventional.
+              From somewhat traditional electronic music to purely synthezised noises and unquantized beats,
+              Giorgio Martini creates music that feels fresh, different and alive.
             </p>
           </div>
 

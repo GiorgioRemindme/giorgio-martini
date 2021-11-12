@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import {loadableP5 as P5Wrapper} from './loadable';
+import {loadableP5 as P5Wrapper} from './loadable'
+import { getRandomArbitrary } from "../helpers"
 
 let darkPurple = '#352D39'
 let pink = '#FF6978'
@@ -14,7 +15,7 @@ function isOverGridPoint (mouseX, mouseY, x, y, range = 20) {
 // https://coolors.co/ff6978-fffcf9-b1ede8-6d435a-352d39
 function Sketch(p5) {
   const windowResized = (p5) => p5.resizeCanvas(p5.windowWidth, p5.windowHeight)
-  const lineThresh = 40
+  const lineThresh = 80
   let color = pink
   let spots = []
   let cols = 20
@@ -47,8 +48,8 @@ function Sketch(p5) {
     }
 
     function randomWalk() {
-      _x += p5.random(-0.5,0.5)
-      _y += p5.random(-0.5,0.5)
+      _x += getRandomArbitrary(-1,1)
+      _y += getRandomArbitrary(-1,1)
     }
 
     function values () {
@@ -69,12 +70,12 @@ function Sketch(p5) {
   }
 
   p5.setup = () => {
-    // p5.frameRate(1)
+    p5.frameRate(24)
     canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight/* , p5.WEBGL */)
     p5.background(darkPurple);
     canvas.position(0, 0).style('z-index', '-1')
     
-    cols = p5.map(p5.width, 0, 2000 , 2, 30)
+    cols = p5.map(p5.width, 0, 2000 , 2, 20)
     const gridSize  = p5.width/cols
     rows = p5.height/gridSize
 

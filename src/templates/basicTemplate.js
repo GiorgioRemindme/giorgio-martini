@@ -23,7 +23,7 @@ const useScrollTo = id => {
       const top = window.scrollY + el.getBoundingClientRect().top - 130 // add offset as props
       window.setTimeout(() => {
         window.scrollTo({ top, behavior: "smooth" })
-      }, 1000) // time too... as props
+      }, 100) // time too... as props
     }
   }, [id])
 }
