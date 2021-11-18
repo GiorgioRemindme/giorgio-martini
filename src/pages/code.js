@@ -14,32 +14,32 @@ const array = [
   {
     title: "Probable Future",
     img: probable,
-    link: "probable-future"
+    link: "/probable-future"
   },
   {
     title: "0808",
     img: lines,
-    link: "8080"
+    link: "/8080"
   },
   {
     title: "Fragment",
     img: fragment,
-    link: "fragment"
+    link: "/fragment"
   },
   {
     title: "M0SAIC",
     img: mosaic,
-    link: "mosaic"
+    link: "/mosaic"
   },
   {
     title: "Protocol",
     img: protocol,
-    link: "protocol"
+    link: "/protocol"
   },
   {
     title: "M0SAIC",
     img: mosaic,
-    link: "page1"
+    link: "/page1"
   }
 ]
 

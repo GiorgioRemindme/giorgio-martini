@@ -1,11 +1,12 @@
 import React, { useLayoutEffect } from "react"
 import { Link } from "gatsby"
 import Layout from '../components/Layout'
-import DancingLines from "../sketches/DancingLines";
-import ProbableFuture from "../sketches/ProbableFuture";
-import Fragment from "../sketches/Fragment";
+import DancingLines from "../sketches/DancingLines"
+import ProbableFuture from "../sketches/ProbableFuture"
+import Fragment from "../sketches/Fragment"
 import Mosaic from '../sketches/mosaic'
 import Protocol from '../sketches/protocol'
+import "tachyons/css/tachyons.min.css"
 
 let sketches = {
   dancingLines: <DancingLines />,
@@ -28,7 +29,7 @@ const useScrollTo = id => {
   }, [id])
 }
 
-const BasicTemplate = props => {
+const BasicTemplate = (props) => {
   let sketch
   const { pageContext } = props
   const { pageContent } = pageContext
@@ -55,4 +56,5 @@ const BasicTemplate = props => {
     </Layout>        
   )
 }
+
 export default BasicTemplate
