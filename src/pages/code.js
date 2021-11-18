@@ -14,37 +14,38 @@ const array = [
   {
     title: "Probable Future",
     img: probable,
-    link: "/probable-future"
+    link: "probable-future"
   },
   {
     title: "0808",
     img: lines,
-    link: "/8080"
+    link: "8080"
   },
   {
     title: "Fragment",
     img: fragment,
-    link: "/fragment"
+    link: "fragment"
   },
   {
     title: "M0SAIC",
     img: mosaic,
-    link: "/mosaic"
+    link: "mosaic"
   },
   {
     title: "Protocol",
     img: protocol,
-    link: "/protocol"
+    link: "protocol"
   },
   {
     title: "M0SAIC",
     img: mosaic,
-    link: "/page1"
+    link: "page1"
   }
 ]
 
 function SketchThumbnail({ title, img, link, location }) {
   const url = location.href ? location.href : '';
+  console.log('url: ', url)
   return (
     <a href={url+link} className="f0 sketchThumbnail fl w-100 w-third-ns link">
       <div className="relative pa1">
