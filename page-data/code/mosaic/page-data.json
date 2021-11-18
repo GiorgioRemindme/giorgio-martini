@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---src-templates-basic-template-js",
-    "path": "/mosaic",
+    "path": "/code/mosaic",
     "result": {"pageContext":{"pageContent":[{"item":"Mosaic"},{"item":"Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic."},{"item":"Mosaic"}]}},
     "staticQueryHashes": []}
