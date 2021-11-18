@@ -1,24 +1,24 @@
-- path: "/probable-future"
+- path: "code/probable-future"
   content:
     - item: Probable Future
     - item: Javascript on HTML canvas. 324 characters. 1FPS. HSL Color mode. Chromatic.
     - item: ProbableFuture
-- path: "/8080"
+- path: "code/8080"
   content:
     - item: "8080"
     - item: Javascript on HTML canvas. Generative. 232 Characters. 25 FPS. RGB. Chromatic.
     - item: DancingLines
-- path: "/fragment"
+- path: "code/fragment"
   content:
     - item: Fragment
     - item: Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic.
     - item: Fragment
-- path: "/mosaic"
+- path: "code/mosaic"
   content:
     - item: Mosaic
     - item: Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic.
     - item: Mosaic
-- path: "/protocol"
+- path: "code/protocol"
   content:
     - item: Protocol
     - item: Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic.
