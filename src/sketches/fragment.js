@@ -56,6 +56,7 @@ function Sketch(p5) {
   }
 
   p5.draw = () => {
+    p5.frameRate(24)
     let _newCols = p5.map(p5.mouseX, 0, p5.width, 0, 40)
     let newCols = Math.ceil(_newCols)
     let _newRows = p5.map(p5.mouseY, 0, p5.height, 0, 40)

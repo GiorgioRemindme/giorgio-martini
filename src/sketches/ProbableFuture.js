@@ -91,6 +91,7 @@ function Sketch(p5) {
 
   p5.draw = () => {
     // p5.rotateX(rotation)
+    p5.frameRate(24)
     p5.translate(lineSpacing, -lineSpacing)
     p5.background("#140c28")
     grid.forEach( row => {

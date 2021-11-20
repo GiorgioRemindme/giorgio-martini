@@ -59,12 +59,14 @@ function Sketch(p5) {
     let initialAnimation = animation
     let maxAnimation = 80
     let resting = 0
-    let initialResting = 100
-    let fade = 30
+    let initialResting = 40
+    let fade = 80
+    let minFadeAnim = 0
+    let outroRotation
    
     function generatePositions() {
       p5.angleMode(p5.DEGREES)
-      r = p5.random(5, opts.maxCircleSize)
+      r = p5.random(5, opts.maxCircleSize) // use native
       amt = evenRandomNumber(opts.amt)
       angle = 360 / amt
       let cropRadius = p5.random(opts.cropRadius[0], opts.cropRadius[1])
@@ -87,16 +89,15 @@ function Sketch(p5) {
     }
 
     function display() {
+      // Intro...
       if (animation < maxAnimation) {
-        animation = animation + 1 * (1 + (animation /10)) // accelerate value
 
+        animation = animation + 2 * (1 + (animation /10)) // accelerate value
         posArray.forEach((pos, i) => {
           // Divide angle into the maxAnimation and then multiply by
           // animation which increases every frame
           let rotation = pos[0] / maxAnimation * animation
-
           if (animation >= maxAnimation) return
-
           p5.push()
             p5.rotate(rotation)
             p5.translate(pos[1], 0)
@@ -105,9 +106,9 @@ function Sketch(p5) {
         })
       }
 
+      // Resting
       if (animation >= maxAnimation && resting <= initialResting ) {
         resting ++
-
         posArray.forEach((pos, i) => {
           p5.push()
             p5.rotate(pos[0])
@@ -115,29 +116,28 @@ function Sketch(p5) {
             p5.ellipse(0, 0, r, r)
           p5.pop()
         })        
-
-        // if (resting > initialResting) {
-        //   animation = initialAnimation
-        //   resting = 0
-        //   generatePositions()
-        // }
       }
 
-      if (resting >= initialResting) {
+      // Outro
+      if (resting >= initialResting && fade > 1 ) {
         fade--
-        
         posArray.forEach((pos, i) => {
-          let rotation = pos[0] + fade
-          
+          outroRotation = pos[0] - (pos[0] / fade)
           p5.push()
-            p5.rotate(rotation)
+            p5.rotate(-outroRotation)
             p5.translate(pos[1], 0)
             p5.ellipse(0, 0, r, r)
           p5.pop()
-        })  
-
+        })
       }
 
+      // Reset values to start again...
+      if (fade === 1 ) {
+        generatePositions()
+        fade = 80
+        animation = 0
+        resting = 0
+      }
     }    
 
     return {
@@ -177,6 +177,7 @@ function Sketch(p5) {
   }
 
   p5.draw = () => {
+    p5.frameRate(30)
     p5.translate(p5.width / 2, p5.height / 2) 
     
     // reset to black
@@ -191,10 +192,6 @@ function Sketch(p5) {
     
     p5.filter(p5.INVERT)
   }
-
-  // p5.keyPressed = () => {
-  //   if (p5.keyCode === p5.LEFT_ARROW) p5.noLoop()
-  // }
 }
 
 export default class Protocol extends Component{

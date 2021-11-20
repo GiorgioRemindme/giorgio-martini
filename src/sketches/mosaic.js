@@ -110,7 +110,7 @@ function Sketch(p5) {
 
   p5.draw = () => {
     p5.frameCount > 0
-    ? p5.frameRate(10)
+    ? p5.frameRate(5)
     : p5.frameRate(1)
 
     canvas.mouseOver(() => p5.frameRate(0))
