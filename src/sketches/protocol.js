@@ -53,8 +53,12 @@ function Sketch(p5) {
   function circles(opts) {
     let r 
     let angle
+    let introAngle
+    let outroAngle
     let amt
     let posArray = []
+    let introPosArray = []
+    let outroPosArray = []
     let animation = 0
     let initialAnimation = animation
     let maxAnimation = 150
@@ -69,6 +73,9 @@ function Sketch(p5) {
       r = p5.random(5, opts.maxCircleSize) // use native
       amt = evenRandomNumber(opts.amt)
       angle = 360 / amt
+      // these are some ugly magic numbers... try to fix the jumping between intro and outro other way...
+      introAngle = 362.5 / amt
+      outroAngle = 364.5 / amt
       let cropRadius = p5.random(opts.cropRadius[0], opts.cropRadius[1])
 
       // SETTINGS 
@@ -81,10 +88,20 @@ function Sketch(p5) {
       !opts.strokeWeight && p5.fill(color)
       !opts.strokeWeight && p5.noStroke()
       
-      // Fill positions array
+      // Reset and fill positions arrays below...
+      // we should just use one posArray, but we are doing a hack
+      // of scaling the rotation so there is no jumping between intro and outro
       posArray = []
       for (let i = 0; i < amt; i++) {
         posArray.push([angle * i, cropRadius])
+      }    
+      introPosArray = []
+      for (let i = 0; i < amt; i++) {
+        introPosArray.push([introAngle * i, cropRadius])
+      }    
+      outroPosArray = []
+      for (let i = 0; i < amt; i++) {
+        outroPosArray.push([outroAngle * i, cropRadius])
       }    
     }
 
@@ -93,10 +110,9 @@ function Sketch(p5) {
       if (animation < maxAnimation) {
         animation++
 
-        posArray.forEach((pos, i) => {
-
-          let rotationAddition = (pos[0] / animation)
-          let rotation = pos[0] - rotationAddition
+        introPosArray.forEach((pos, i) => {
+          let subtractor = pos[0] / animation
+          let rotation = pos[0] - subtractor
           
           p5.push()
             p5.rotate(rotation)
@@ -105,7 +121,6 @@ function Sketch(p5) {
           p5.pop()
         })
       } else if (animation === maxAnimation && resting <= initialResting ) {
-        // p5.noLoop()
         // Resting
         resting ++
         posArray.forEach((pos, i) => {
@@ -118,7 +133,7 @@ function Sketch(p5) {
       } else if (resting >= initialResting && fade > 1 ) {
       // Outro
         fade--
-        posArray.forEach((pos, i) => {
+        outroPosArray.forEach((pos, i) => {
           let outroRotation = pos[0] - (pos[0] / fade)
           p5.push()
             p5.rotate(-outroRotation)
