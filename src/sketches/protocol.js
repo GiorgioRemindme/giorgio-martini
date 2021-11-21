@@ -94,11 +94,12 @@ function Sketch(p5) {
         animation++
 
         posArray.forEach((pos, i) => {
+
           let rotationAddition = (pos[0] / animation)
-          let rotation = pos[0] + rotationAddition
+          let rotation = pos[0] - rotationAddition
           
           p5.push()
-            p5.rotate(-rotation)
+            p5.rotate(rotation)
             p5.translate(pos[1], 0)
             p5.ellipse(0, 0, r, r)
           p5.pop()
