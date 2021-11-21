@@ -57,11 +57,12 @@ function Sketch(p5) {
     let posArray = []
     let animation = 0
     let initialAnimation = animation
-    let maxAnimation = 100
+    let maxAnimation = 150
     let resting = 0
     let initialResting = 40
     let fade = 80
     let minFadeAnim = 0
+    let introAddition = 0
    
     function generatePositions() {
       p5.angleMode(p5.DEGREES)
@@ -91,20 +92,20 @@ function Sketch(p5) {
       // Intro...
       if (animation < maxAnimation) {
         animation++
+
         posArray.forEach((pos, i) => {
-          let rotation = pos[0] + (pos[0] / animation)
+          let rotationAddition = (pos[0] / animation)
+          let rotation = pos[0] + rotationAddition
+          
           p5.push()
             p5.rotate(-rotation)
             p5.translate(pos[1], 0)
             p5.ellipse(0, 0, r, r)
           p5.pop()
         })
-      }
-
-      // Resting
-      if (animation === maxAnimation && resting <= initialResting ) {
+      } else if (animation === maxAnimation && resting <= initialResting ) {
         // p5.noLoop()
-        // p5.clear()
+        // Resting
         resting ++
         posArray.forEach((pos, i) => {
           p5.push()
@@ -113,10 +114,8 @@ function Sketch(p5) {
             p5.ellipse(0, 0, r, r)
           p5.pop()
         })   
-      }
-
+      } else if (resting >= initialResting && fade > 1 ) {
       // Outro
-      if (resting >= initialResting && fade > 1 ) {
         fade--
         posArray.forEach((pos, i) => {
           let outroRotation = pos[0] - (pos[0] / fade)
@@ -125,16 +124,15 @@ function Sketch(p5) {
             p5.translate(pos[1], 0)
             p5.ellipse(0, 0, r, r)
           p5.pop()
-        })
-      }
-
-      // Reset values to start again...
-      if (fade === 1 ) {
+        })        
+      } else if (fade === 1) {
+        // Reset values to start again...
         generatePositions()
         fade = 80
         animation = 0
-        resting = 0
+        resting = 0        
       }
+
     }    
 
     return {
@@ -146,6 +144,9 @@ function Sketch(p5) {
   p5.setup = () => {
     p5.createCanvas(600, 600)
     p5.translate(p5.width / 2, p5.height / 2) 
+    // if (p5.frameRate > 70) {
+      
+    // } 
     
     c1Opts = {
       amt: 8,
@@ -174,7 +175,8 @@ function Sketch(p5) {
   }
 
   p5.draw = () => {
-    p5.frameRate(30)
+
+    // p5.frameRate(1)
     p5.translate(p5.width / 2, p5.height / 2) 
     
     // reset to black
