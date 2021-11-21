@@ -65,8 +65,6 @@ function Sketch(p5) {
     let resting = 0
     let initialResting = 40
     let fade = 80
-    let minFadeAnim = 0
-    let introAddition = 0
    
     function generatePositions() {
       p5.angleMode(p5.DEGREES)
