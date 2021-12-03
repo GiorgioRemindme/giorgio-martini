@@ -65,6 +65,7 @@ function Sketch(p5) {
     let resting = 0
     let initialResting = 40
     let fade = 80
+
    
     function generatePositions() {
       p5.angleMode(p5.DEGREES)
@@ -76,20 +77,21 @@ function Sketch(p5) {
       outroAngle = 364.5 / amt
       let cropRadius = p5.random(opts.cropRadius[0], opts.cropRadius[1])
 
-      // SETTINGS 
-      if(opts.strokeWeight) {
+      if(opts.strokeWeight === undefined || opts.strokeWeight.length == 0) {
+        // set fill no stroke
+        p5.fill(color)
+        p5.noStroke()
+      } else {
+        // set nofill and stroke
         const [strokeMin, strokeMax] = opts.strokeWeight
         opts.strokeWeight && p5.noFill() 
         opts.strokeWeight && p5.strokeWeight(p5.random(strokeMin, strokeMax)) 
         opts.strokeWeight && p5.stroke(color)  
-      }
-      !opts.strokeWeight && p5.fill(color)
-      !opts.strokeWeight && p5.noStroke()
-      
-      // Reset and fill positions arrays below...
+      } 
+
       // we should just use one posArray, but we are doing a hack
       // of scaling the rotation so there is no jumping between intro and outro
-      posArray = []
+      posArray = [] // reseting array b4 filling it again...
       for (let i = 0; i < amt; i++) {
         posArray.push([angle * i, cropRadius])
       }    
@@ -104,10 +106,10 @@ function Sketch(p5) {
     }
 
     function display() {
+      
       // Intro...
       if (animation < maxAnimation) {
         animation++
-
         introPosArray.forEach((pos, i) => {
           let subtractor = pos[0] / animation
           let rotation = pos[0] - subtractor
@@ -146,9 +148,7 @@ function Sketch(p5) {
         animation = 0
         resting = 0        
       }
-
     }    
-
     return {
       generatePositions,
       display
@@ -158,10 +158,7 @@ function Sketch(p5) {
   p5.setup = () => {
     p5.createCanvas(600, 600)
     p5.translate(p5.width / 2, p5.height / 2) 
-    // if (p5.frameRate > 70) {
-      
-    // } 
-    
+
     c1Opts = {
       amt: 8,
       maxCircleSize: p5.width/2,
@@ -173,8 +170,7 @@ function Sketch(p5) {
       cropRadius: [p5.width/8, p5.width/3],
       strokeWeight: [10, 15]
     }
-
-      let squaresOpts = {
+    let squaresOpts = {
       amt: 4,
       squareSize: p5.width/2,
       strokeWeight: 10,
@@ -189,20 +185,16 @@ function Sketch(p5) {
   }
 
   p5.draw = () => {
-
     // p5.frameRate(1)
     p5.translate(p5.width / 2, p5.height / 2) 
-    
     // reset to black
     p5.blendMode(p5.REPLACE) 
     p5.background(0)
-    
     // set to difference to make the ngative space stuff
     p5.blendMode(p5.DIFFERENCE) 
     c1.display()
     c2.display()
     // squares.display()
-    
     p5.filter(p5.INVERT)
   }
 }
