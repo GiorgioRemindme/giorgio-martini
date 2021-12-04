@@ -1,11 +1,15 @@
 import React, { Component } from "react"
-import {loadableP5 as P5Wrapper} from '../components/loadable';
+import {loadableP5 as P5Wrapper} from '../components/loadable'
+import { getRandomArbitrary } from "../helpers"
 
 let img
-let c1
-let c2
+let circle1 
+let circle2 
+let squares 
+let cropElement
 let c1Opts
 let c2Opts
+let squaresOpts
 let color = '#fff'
 
 function evenRandomNumber(amt) { // add to utils
@@ -13,44 +17,7 @@ function evenRandomNumber(amt) { // add to utils
 }
 
 function Sketch(p5) {
-  // function squares(opts) {
-  //   let squaresRadius 
-  //   let angle
-  //   let amt
-  //   // if size is small use fewe squares 2
-  //   function display() {
-  //     squaresRadius = p5.random(p5.width/8, opts.squareSize)
-  //     console.log("squaresRadius: ", squaresRadius);
-  //     amt = Math.ceil(p5.random(opts.amt))
-  //     if (squaresRadius < 160) amt = 2 // make it into a p5.map
-      
-  //     angle = (360/amt)/4
-  //     if(opts.strokeWeight) {
-  //       opts.strokeWeight && p5.noFill() 
-  //       opts.strokeWeight && p5.strokeWeight(p5.random(2, opts.strokeWeight)) 
-  //       opts.strokeWeight && p5.stroke(color)  
-  //     }
-      
-  //     !opts.strokeWeight && p5.fill(color)
-  //     !opts.strokeWeight && p5.noStroke()
-  //     p5.angleMode(p5.DEGREES)
-      
-
-  //     for (let i = 0; i < amt; i++) {
-  //       p5.push()
-  //       p5.rotate(angle * i)
-  //       p5.rectMode(p5.CENTER)
-  //       p5.rect(0, 0, squaresRadius, squaresRadius)
-  //       p5.pop()
-  //     }    
-  //   }
-  
-  //   return {
-  //     display
-  //   }
-  // }
-
-  function circles(opts) {
+  function cropElement(opts) {
     let r 
     let angle
     let introAngle
@@ -65,28 +32,36 @@ function Sketch(p5) {
     let resting = 0
     let initialResting = 40
     let fade = 80
+    let isFill = true
+    let strokeWeight = []
 
-   
+    function drawingSettings(isFill, strokeWeight) {
+      if (isFill) {
+        p5.fill(color)
+        p5.noStroke()        
+      } else {
+        p5.noFill() 
+        p5.strokeWeight(strokeWeight) 
+        p5.stroke(color)  
+      }
+    }
+
     function generatePositions() {
       p5.angleMode(p5.DEGREES)
-      r = p5.random(5, opts.maxCircleSize) // use native
+      r = getRandomArbitrary(5, opts.maxSize) // use native
       amt = evenRandomNumber(opts.amt)
       angle = 360 / amt
       // these are some ugly magic numbers... try to fix the jumping between intro and outro other way...
       introAngle = 362.5 / amt
       outroAngle = 364.5 / amt
-      let cropRadius = p5.random(opts.cropRadius[0], opts.cropRadius[1])
+      let cropRadius = getRandomArbitrary(opts.cropRadius[0], opts.cropRadius[1])
 
       if(opts.strokeWeight === undefined || opts.strokeWeight.length == 0) {
-        // set fill no stroke
-        p5.fill(color)
-        p5.noStroke()
+        isFill = true
       } else {
-        // set nofill and stroke
         const [strokeMin, strokeMax] = opts.strokeWeight
-        opts.strokeWeight && p5.noFill() 
-        opts.strokeWeight && p5.strokeWeight(p5.random(strokeMin, strokeMax)) 
-        opts.strokeWeight && p5.stroke(color)  
+        isFill = false
+        strokeWeight = getRandomArbitrary(strokeMin, strokeMax)
       } 
 
       // we should just use one posArray, but we are doing a hack
@@ -106,39 +81,65 @@ function Sketch(p5) {
     }
 
     function display() {
-      
       // Intro...
       if (animation < maxAnimation) {
+        drawingSettings(isFill, strokeWeight)
         animation++
         introPosArray.forEach((pos, i) => {
           let subtractor = pos[0] / animation
           let rotation = pos[0] - subtractor
           
-          p5.push()
+          p5.push() // make this whole part into a function and repeat below...
             p5.rotate(rotation)
             p5.translate(pos[1], 0)
-            p5.ellipse(0, 0, r, r)
+            if (opts.ellipse) {
+              p5.ellipse(0, 0, r, r)
+            } else {
+              p5.rectMode(p5.CENTER)
+                p5.push()
+                  p5.rotate(45)
+                  p5.rect(0, 0, r, r)
+                p5.pop()
+            }
           p5.pop()
         })
       } else if (animation === maxAnimation && resting <= initialResting ) {
         // Resting
+        drawingSettings(isFill, strokeWeight)
         resting ++
         posArray.forEach((pos, i) => {
           p5.push()
             p5.rotate(pos[0])
             p5.translate(pos[1], 0)
-            p5.ellipse(0, 0, r, r)
+            if (opts.ellipse) {
+              p5.ellipse(0, 0, r, r)
+            } else {
+              p5.rectMode(p5.CENTER)
+              p5.push()
+                p5.rotate(45)
+                p5.rect(0, 0, r, r)
+              p5.pop()
+            }
           p5.pop()
         })   
       } else if (resting >= initialResting && fade > 1 ) {
       // Outro
+      drawingSettings(isFill, strokeWeight)
         fade--
         outroPosArray.forEach((pos, i) => {
           let outroRotation = pos[0] - (pos[0] / fade)
           p5.push()
             p5.rotate(-outroRotation)
             p5.translate(pos[1], 0)
-            p5.ellipse(0, 0, r, r)
+            if (opts.ellipse) {
+              p5.ellipse(0, 0, r, r)
+            } else {
+              p5.rectMode(p5.CENTER)
+              p5.push()
+                p5.rotate(45)
+                p5.rect(0, 0, r, r)
+              p5.pop()
+            }
           p5.pop()
         })        
       } else if (fade === 1) {
@@ -161,40 +162,45 @@ function Sketch(p5) {
 
     c1Opts = {
       amt: 8,
-      maxCircleSize: p5.width/2,
-      cropRadius: [p5.width/8, p5.width/4],
+      maxSize: p5.width/2,
+      cropRadius: [p5.width/16, p5.width/4],
+      ellipse: true,
     }
     c2Opts = {
       amt: 8,
-      maxCircleSize: p5.width/4,
+      maxSize: p5.width/4,
       cropRadius: [p5.width/8, p5.width/3],
-      strokeWeight: [10, 15]
+      strokeWeight: [10, 15],
+      ellipse: true,
     }
-    let squaresOpts = {
+
+    squaresOpts = {
       amt: 4,
-      squareSize: p5.width/2,
-      strokeWeight: 10,
+      maxSize: p5.width/6,
+      strokeWeight: [4, 25],
+      cropRadius: [p5.width/6, p5.width/4],
     }
     
-    c1 = circles(c1Opts)
-    c2 = circles(c2Opts)
-    // squares = squares(squaresOpts)
+    circle1 = cropElement(c1Opts)
+    circle2 = cropElement(c2Opts)
+    squares = cropElement(squaresOpts)
     p5.translate(-p5.width / 2, -p5.height / 2) 
-    c1.generatePositions()
-    c2.generatePositions()
+    circle1.generatePositions()
+    circle2.generatePositions()
+    squares.generatePositions()
   }
 
   p5.draw = () => {
-    // p5.frameRate(1)
+    p5.frameRate(30)
     p5.translate(p5.width / 2, p5.height / 2) 
     // reset to black
     p5.blendMode(p5.REPLACE) 
     p5.background(0)
     // set to difference to make the ngative space stuff
     p5.blendMode(p5.DIFFERENCE) 
-    c1.display()
-    c2.display()
-    // squares.display()
+    circle1.display()
+    circle2.display()
+    squares.display()
     p5.filter(p5.INVERT)
   }
 }
