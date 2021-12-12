@@ -1,24 +1,72 @@
-import React from "react";
-import Background from "../components/BackgroundP5";
+import React from 'react';
+import DancingLines from '../sketches/DancingLines'
 import Layout from '../components/Layout'
-import { Link } from "gatsby"
-import "tachyons/css/tachyons.min.css";
-import "../styles/global.css";
+import { Link } from 'gatsby'
+import 'tachyons/css/tachyons.min.css';
+import '../styles/global.css'
+import probable from '../images/binaryraon-400x250.jpeg'
+import lines from '../images/0808.png'
+import mosaic from '../images/mosaic.png'
+import fragment from '../images/fragment.png'
+import protocol from '../images/protocol.png'
 
-const IndexPage = () => (
-    <div className="">
-        <Background/>
-        <Layout hasFooter={false} isDarkMode={false}>
-        <div className="pt1">
-          <p className="b white f-subheadline">Hey, I'm Giorgio Martini.</p>
-          <p className="b white f-title">I'm a Frontend developer based in Berlin.</p>
-          <p className="white">I also love to create Art with <Link className="_pink" to='/code/'>code</Link>, making <Link className="_pink" to='/code/'>music</Link> and taking <Link className="_pink" to='/code/'>pics</Link>.
-          <p className="white">You can read more about me <Link className="_pink" to='/code/'>here</Link>.</p>
-          </p>
-        </div>
-      </Layout>        
-    </div>
+const array = [
+  {
+    title: "Probable Future",
+    img: probable,
+    link: "probable-future"
+  },
+  {
+    title: "0808",
+    img: lines,
+    link: "8080"
+  },
+  {
+    title: "Fragment",
+    img: fragment,
+    link: "fragment"
+  },
+  {
+    title: "M0SAIC",
+    img: mosaic,
+    link: "mosaic"
+  },
+  {
+    title: "Protocol",
+    img: protocol,
+    link: "protocol"
+  },
+  {
+    title: "M0SAIC",
+    img: mosaic,
+    link: "page1"
+  }
+]
+
+function SketchThumbnail({ title, img, link, location }) {
+  const url = location.href + 'code/' || '';
+  console.log("url: ", url)
+  console.log("url+link: ", url+link)
+  return (
+    <a href={url+link} className="f0 sketchThumbnail fl w-100 w-third-ns link">
+      <div className="relative pa1">
+        <img className="w-100" src={img} />
+        <p className="b white top-0 tc w-100 absolute f3 tc ma0 pa2">{title}</p>
+      </div>
+    </a>
   )
+}
 
-  export default IndexPage
-  
+const Code = ({ location }) => (
+  <Layout>
+    <p className="b f-subheadline">Creative and Interactive Web experiences.</p>
+    <p className="f3 mb5">Web developer with a focus on interactive and creative development.</p>
+    <div className="cf">
+      {array.map(sketch => <SketchThumbnail {...sketch} location={location} />)}
+    </div>
+  </Layout>
+)
+
+export default Code
+
+// the casing of the component name sometimes makes hotreload not work

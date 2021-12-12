@@ -1,5 +1,4 @@
 import React, { useLayoutEffect } from "react"
-import { Link } from "gatsby"
 import Layout from '../components/Layout'
 import DancingLines from "../sketches/DancingLines"
 import ProbableFuture from "../sketches/ProbableFuture"
@@ -16,24 +15,10 @@ let sketches = {
   protocol: <Protocol />,
 }
 
-// move somewhere...
-const useScrollTo = id => {
-  useLayoutEffect(() => {
-    if (id) {
-      const el = document.getElementById(id)
-      const top = window.scrollY + el.getBoundingClientRect().top - 130 // add offset as props
-      window.setTimeout(() => {
-        window.scrollTo({ top, behavior: "smooth" })
-      }, 100) // time too... as props
-    }
-  }, [id])
-}
-
 const BasicTemplate = (props) => {
   let sketch
   const { pageContext } = props
   const { pageContent } = pageContext
-  useScrollTo('scrollTo')
 
   for (const [key, value] of Object.entries(sketches)) {
     for (let i = 0; i < pageContent.length; i++) {

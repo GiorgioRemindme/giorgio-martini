@@ -1,15 +1,18 @@
 import React from 'react'
 import { Link } from "gatsby"
+import { activeStyle } from '../utils'
 
-const Header = ({isDarkMode = false}) => {
-  const color = isDarkMode ? "near-black" : "white"
+console.log(activeStyle)
+
+const Header = ({isDarkMode}) => {
+  const color = isDarkMode ? "white" : "_pink"
   return (
-    <ul className="list flex justify-center">
-      <li><Link className={`ph4 ${color} no-underline _pink`} to="/">Home</Link></li>
-      <li><Link className={`ph4 ${color} no-underline _pink`} to="/code/">Code</Link></li>
-      <li><Link className={`ph4 ${color} no-underline _pink`} to="/music/">Music</Link></li>
-      <li><Link className={`ph4 ${color} no-underline _pink`} to="/blog/">Photos</Link></li>
-      <li><Link className={`ph4 ${color} no-underline _pink`} to="/about/">About</Link></li>
+    <ul className="list flex justify-center mv4 pt2">
+      <li><Link activeClassName='activeClassName' className={`f4 ph4 ${color} no-underline`} to="/">Home</Link></li>
+      <li><Link activeClassName='activeClassName' className={`f4 ph4 ${color} no-underline`} to="/code/">Code</Link></li>
+      <li><Link activeClassName='activeClassName' className={`f4 ph4 ${color} no-underline`} to="/music/">Music</Link></li>
+      <li><Link activeClassName='activeClassName' className={`f4 ph4 ${color} no-underline`} to="/blog/">Photos</Link></li>
+      <li><Link activeClassName='activeClassName' className={`f4 ph4 ${color} no-underline`} to="/about/">About</Link></li>
     </ul>
   )
 }

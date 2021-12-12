@@ -1,5 +1,6 @@
 const fs = require(`fs`)
 const yaml = require(`js-yaml`)
+
 exports.createPages = ({ actions }) => {
   const { createPage } = actions
   const ymlDoc = yaml.safeLoad(fs.readFileSync(`./src/content/index.yaml`, `utf-8`))

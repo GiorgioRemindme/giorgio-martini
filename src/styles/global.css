@@ -5,16 +5,16 @@
 } */
 
 html {
-  font-size: 1rem;
+  /* font-size: 1rem; */
   font-family: 'Space Mono';
 }
 
 body {
-  font-size: 2rem;
+  /* font-size: 2rem; */
 }
 
 ._pink {
-  color: #FF6978 !important;
+  color: #FF6978;
   /* try to not use the important */
 }
 
@@ -72,4 +72,13 @@ a:visited {
 
 .f0 {
  font-size: 0; 
+}
+
+a:hover {
+  text-decoration: line-through;
+}
+
+.activeClassName {
+  text-decoration: line-through;
+  color: black;
 }

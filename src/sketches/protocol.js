@@ -56,7 +56,7 @@ function Sketch(p5) {
       outroAngle = 364.5 / amt
       let cropRadius = getRandomArbitrary(opts.cropRadius[0], opts.cropRadius[1])
 
-      if(opts.strokeWeight === undefined || opts.strokeWeight.length == 0) {
+      if(opts.strokeWeight === undefined || opts.strokeWeight.length === 0) {
         isFill = true
       } else {
         const [strokeMin, strokeMax] = opts.strokeWeight

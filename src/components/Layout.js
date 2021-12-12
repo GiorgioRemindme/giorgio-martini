@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 
-const Layout = ({ children, isDarkMode, hasFooter = true }) => {
+const Layout = ({ children, isDarkMode = false, hasFooter = true }) => {
   return (
     <div className="mw8 center layoutWrapper">
       <div className="center">

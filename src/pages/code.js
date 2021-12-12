@@ -44,9 +44,8 @@ const array = [
 ]
 
 function SketchThumbnail({ title, img, link, location }) {
-  const url = location.href ? location.href : '';
-  console.log("url: ", url)
-  console.log("url+link: ", url+link)
+  const url = location.href || '';
+
   return (
     <a href={url+link} className="f0 sketchThumbnail fl w-100 w-third-ns link">
       <div className="relative pa1">
@@ -58,8 +57,8 @@ function SketchThumbnail({ title, img, link, location }) {
 }
 
 const Code = ({ location }) => (
-  <Layout isDarkMode={true}>
-    <p className="fadeInAnimation b f-subheadline pb4">Generative, interactive and still images made with code.</p>
+  <Layout>
+    <p className="b black f-subheadline">Frontend Development with an edge.</p>
     <div className="cf">
       {array.map(sketch => <SketchThumbnail {...sketch} location={location} />)}
     </div>
