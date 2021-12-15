@@ -1,12 +1,13 @@
 - path: "code/probable-future/"
   content:
     - item: Probable Future
-    - item: Javascript on HTML canvas. 324 characters. 1FPS. HSL Color mode. Chromatic.
+    - item: Javascript on HTML canvas. 1FPS. RBGA Color mode. Chromatic. Generative.
     - item: ProbableFuture
+    - item: true
 - path: "code/8080/"
   content:
     - item: "8080"
-    - item: Javascript on HTML canvas. Generative. 232 Characters. 25 FPS. RGB. Chromatic.
+    - item: Javascript on HTML canvas. Generative. 60 FPS. RGB. Chromatic.
     - item: DancingLines
 - path: "code/fragment/"
   content:
@@ -23,6 +24,11 @@
     - item: Protocol
     - item: Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic.
     - item: Protocol
+- path: "code/poster/"
+  content:
+    - item: Poster
+    - item: Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic.
+    - item: Poster
   # links:
   #   - to: "/page2"
   #   - to: "/page5"

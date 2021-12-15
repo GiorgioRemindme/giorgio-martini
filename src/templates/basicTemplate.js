@@ -5,6 +5,7 @@ import ProbableFuture from "../sketches/ProbableFuture"
 import Fragment from "../sketches/Fragment"
 import Mosaic from '../sketches/mosaic'
 import Protocol from '../sketches/protocol'
+import Poster from '../sketches/poster'
 import "tachyons/css/tachyons.min.css"
 
 let sketches = {
@@ -13,6 +14,7 @@ let sketches = {
   fragment: <Fragment />,
   mosaic: <Mosaic />,
   protocol: <Protocol />,
+  poster: <Poster />,
 }
 
 const BasicTemplate = (props) => {
@@ -21,22 +23,27 @@ const BasicTemplate = (props) => {
   const { pageContent } = pageContext
 
   for (const [key, value] of Object.entries(sketches)) {
-    for (let i = 0; i < pageContent.length; i++) {
-      if (pageContent[i].item.toLowerCase() === key.toLowerCase()) {
-        sketch = value
-      }
-    }
+    if (pageContent[2].item.toLowerCase() === key.toLowerCase()) sketch = value
   }
 
   !sketch && console.log("Sketch not found...")
 
+  let title = pageContent[0].item
+  let description = pageContent[1].item
+  let columns = pageContent[3]?.item
+  
   return (
     <Layout isDarkMode={false}>
-      <div>
-        <p className="b f-subheadline mb2">{pageContent[0].item}</p>
-        <p>{pageContent[1].item}</p>
-        <div className="pt4" id="scrollTo" ></div>
-        {sketch}
+      <div className="flex pt5">
+        <div className="pr3 flex flex1">
+          <div>
+            <p className="b f2">{title}</p>
+            <p className="f4 lh-copy measure">{description}</p>
+          </div>
+        </div>
+        <div className="flex2">
+          {sketch}
+        </div>
       </div>
     </Layout>        
   )

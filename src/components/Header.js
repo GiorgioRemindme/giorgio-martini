@@ -5,7 +5,7 @@ import { activeStyle } from '../utils'
 console.log(activeStyle)
 
 const Header = ({isDarkMode}) => {
-  const color = isDarkMode ? "white" : "_pink"
+  const color = isDarkMode ? "_white" : "_pink"
   return (
     <ul className="list flex justify-center mv4 pt2">
       <li><Link activeClassName='activeClassName' className={`f4 ph4 ${color} no-underline`} to="/">Home</Link></li>

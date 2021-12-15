@@ -3,7 +3,7 @@ import Header from './Header'
 
 const Layout = ({ children, isDarkMode = false, hasFooter = true }) => {
   return (
-    <div className="mw8 center layoutWrapper">
+    <div className="mw8 center layoutWrapper ph0-ns ph4-m ph4">
       <div className="center">
         <Header isDarkMode={isDarkMode} />
         {children}

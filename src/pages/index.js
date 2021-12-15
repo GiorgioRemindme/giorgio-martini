@@ -37,16 +37,15 @@ const array = [
     link: "protocol"
   },
   {
-    title: "M0SAIC",
+    title: "POSTER",
     img: mosaic,
-    link: "page1"
+    link: "poster"
   }
 ]
 
 function SketchThumbnail({ title, img, link, location }) {
   const url = location.href + 'code/' || '';
-  console.log("url: ", url)
-  console.log("url+link: ", url+link)
+
   return (
     <a href={url+link} className="f0 sketchThumbnail fl w-100 w-third-ns link">
       <div className="relative pa1">
@@ -57,13 +56,16 @@ function SketchThumbnail({ title, img, link, location }) {
   )
 }
 
+// can make the grid a reusable component
+
 const Code = ({ location }) => (
   <Layout>
     <p className="b f-subheadline">Creative and Interactive Web experiences.</p>
-    <p className="f3 mb5">Web developer with a focus on interactive and creative development.</p>
-    <div className="cf">
-      {array.map(sketch => <SketchThumbnail {...sketch} location={location} />)}
-    </div>
+    <p className="f3 mb5">Web developer with a focus on interactive and creative programming.</p>
+      <div className="cf">
+        <p className="f2 tc pt4">Archives</p>
+        {array.map(sketch => <SketchThumbnail {...sketch} location={location} />)}
+      </div>
   </Layout>
 )
 

@@ -14,7 +14,7 @@ body {
 }
 
 ._pink {
-  color: #FF6978;
+  color: #FF6978 !important;
   /* try to not use the important */
 }
 
@@ -80,5 +80,17 @@ a:hover {
 
 .activeClassName {
   text-decoration: line-through;
-  color: black;
+  color: black !important;
+}
+
+._white {
+  color: #fff !important;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex2 {
+  flex: 2;
 }

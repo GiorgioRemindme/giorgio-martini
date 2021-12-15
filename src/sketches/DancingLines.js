@@ -11,7 +11,7 @@ function isOdd(num) { // TODO move to utils
 function Sketch(p5) {
   
   p5.setup = () => {
-    p5.createCanvas(1024,600)
+    p5.createCanvas(800,500)
     p5.background("#18020C")
     dancingLine1 = dancingLine(false, p5)
     dancingLine2 = dancingLine(true, p5)
