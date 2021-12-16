@@ -27,7 +27,7 @@
 - path: "code/poster/"
   content:
     - item: Poster
-    - item: Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic.
+    - item: Javascript on HTML canvas. Generative. 305 Lines. 60 FPS. HSV color mode. Chromatic.
     - item: Poster
   # links:
   #   - to: "/page2"

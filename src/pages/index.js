@@ -7,8 +7,9 @@ import '../styles/global.css'
 import probable from '../images/binaryraon-400x250.jpeg'
 import lines from '../images/0808.png'
 import mosaic from '../images/mosaic.png'
-import fragment from '../images/fragment.png'
+import fragment from '../images/fragment.png' // make these jpgs
 import protocol from '../images/protocol.png'
+import poster from '../images/poster.jpg'
 
 const array = [
   {
@@ -38,7 +39,7 @@ const array = [
   },
   {
     title: "POSTER",
-    img: mosaic,
+    img: poster,
     link: "poster"
   }
 ]

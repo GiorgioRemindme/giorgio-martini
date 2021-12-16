@@ -1,99 +1,81 @@
 import React, { Component } from "react"
-import { loadableP5 as P5Wrapper } from '../components/loadable';
+import { loadableP5 as P5Wrapper } from '../components/loadable'
 import randomColor from 'randomcolor'
 import {Vector} from "p5"
-// figure out if i need p5, or if P5Wrapper includes p5.. then remove p5 and import vector from P5Wrapper...
+import '@fontsource/passion-one'
 
-const textArray = ["AMAZING", "SHORTY", "HEYA!", "YUP", "BOOM", "FANTASTIC", "BALLIN'", "FAKE", "NICE", "GREAT", "FABULOUS", "FAB", "BEAST", "UNREAL", "MARVEL", "WOW", "ZOO", "CRAZY", "FUN", "RAD", "GOOD", "GORGEOUS", "REALLY", "YEAH", "LOVELY", "SCARY", "BAM!", "HOT", "SWEET", "NEAT", "SPACE", "COOL", "PURO", "SUPERB", "HURRA", "ALRIGHT", "INSANE", "MAMA", "PERFECT", "BREATH", "GRIND", "RAW", "WHAT", "OKAY", "BOSSY", "CHECK", "DAMN", "STONED", "DADA", "CUTE", "MK3", "AKA", "GROOVY", "DONE", "WICKED", "HYFR", "GLORY", "YUMMY", "BIG", "EPIC", "EXTRA", "DROP", "HUGE", "STUNNED", "HOAX", "INK", "FIRE", "HELLA", "LOOP", "YO", "EASY", "GEIL", "BIG", "SWEET", "KING", "OUTTA", "DANDY", "YIPPEE", "PIMPIN'", "YAY", "DUH", "FEAR", "STASH", "SURE", "PHAT", "GEEZ", "BAE", "BABE", "BABY", "PONG", "YASS", "NOISE", "HA!", "FUCK", "HOLLER", "RAVE", "CLASSIC", "GENIUS", "DOOMED", "BLUNT", "HELLO", "BANG", "LOOSE", "HOLLY", "MASSIVE", "FRESH", "SHINY", "PEACHY", "A-HA", "HELP!", "BOOZE", "BOYZ", "GIRLZ", "TAMALE", "HEROIN", "SAVAGE", "VIBE", "MUTTER", "GO", "BUDHA", "FATHER", "DANDY", "HEY", "0.0009", "MARY", "GANG", "FYI", "RALLY", "FRENZY"]
-let vignette,
-  textShadow,
-  bubble,
-  // vars to use in Draw
-  arrayOfRandomXposForBubbles,
-  arrayOfRandomYposForBubbles,
-  indexOfArrayOfRandomXposForBubbles,
-  indexOfArrayOfRandomYposForBubbles,
-  arrayOfRandomXposForRects,
-  arrayOfRandomYposForRects,
-  arrayOfRandomXposForLines,
-  arrayOfRandomYposForLines,
-  colsArray,
-  randomSizesArrForBubbles,
-  randomSizesArrForRects,
-  collectionOfColorTonesForBubbles,
-  collectionOfColorTonesForRect,
-  collectionOfRotations,
-  arrayOfRandomPosForLines,
-  linesAngle,
-  collectionOfLengths,
-  collectionOfRotsForBeziers,
-  pointsForBezier,
-  someWord,
-  bubblesArr = [],
-  linesArr = [],
-  arrayOfInitialBubblesXPos,
-  arrayOfInitialBubblesYPos,
-  lin
-
-const canvasX = 300,
-  canvasY = 500,
-  degreeProbs = [45, 135],
-  // Amount of elements
-  amountOfBubbles = 20,
-  amountOfRects = 10,
-  amountOfLines = 6, //6
-  amountOfBeziers = 4,
-  // vars on for X
-  firstProbStepX = 0.3 * canvasX,
-  secondProbStepX = canvasX - (0.2 * canvasX),
-  finalProbStepX = canvasX,
-  // vars for Y
-  firstProbStepY = 0.6 * canvasY,
-  secondProbStepY = canvasY - (0.2 * canvasY),
-  finalProbStepY = canvasY
-
+// Find out if we need p5, or if P5Wrapper includes p5... then remove p5 and import vector from P5Wrapper.
+let textArray = ["AMAZING", "SHORTY", "HEYA!", "YUP", "BOOM", "FANTASTIC", "BALLIN'", "FAKE", "NICE", "GREAT", "FABULOUS", "FAB", "BEAST", "UNREAL", "MARVEL", "WOW", "ZOO", "CRAZY", "FUN", "RAD", "GOOD", "GORGEOUS", "REALLY", "YEAH", "LOVELY", "SCARY", "BAM!", "HOT", "SWEET", "NEAT", "SPACE", "COOL", "PURO", "SUPERB", "HURRA", "ALRIGHT", "INSANE", "MAMA", "PERFECT", "BREATH", "GRIND", "RAW", "WHAT", "OKAY", "BOSSY", "CHECK", "DAMN", "STONED", "DADA", "CUTE", "MK3", "AKA", "GROOVY", "DONE", "WICKED", "HYFR", "GLORY", "YUMMY", "BIG", "EPIC", "EXTRA", "DROP", "HUGE", "STUNNED", "HOAX", "INK", "FIRE", "HELLA", "LOOP", "YO", "EASY", "GEIL", "BIG", "SWEET", "KING", "OUTTA", "DANDY", "YIPPEE", "PIMPIN'", "YAY", "DUH", "FEAR", "STASH", "SURE", "PHAT", "GEEZ", "BAE", "BABE", "BABY", "PONG", "YASS", "NOISE", "HA!", "FUCK", "HOLLER", "RAVE", "CLASSIC", "GENIUS", "DOOMED", "BLUNT", "HELLO", "BANG", "LOOSE", "HOLLY", "MASSIVE", "FRESH", "SHINY", "PEACHY", "A-HA", "HELP!", "BOOZE", "BOYZ", "GIRLZ", "TAMALE", "HEROIN", "SAVAGE", "VIBE", "MUTTER", "GO", "BUDHA", "FATHER", "DANDY", "HEY", "0.0009", "MARY", "GANG", "FYI", "RALLY", "FRENZY"]
+let textShadow
+let randomXposForBubbles
+let randomYposForBubbles
+let indexOfArrayOfRandomXposForBubbles
+let indexOfArrayOfRandomYposForBubbles
+let randomXposForRects
+let randomYposForRects
+let randomXposForLines
+let randomYposForLines
+let colsArray
+let randomSizesForBubbles
+let randomSizesForRects
+let colorTonesForBubbles
+let colorTonesForRect
+let collectionOfRotations
+let arrayOfRandomPosForLines
+let linesAngle
+let collectionOfLengths
+let collectionOfRotsForBeziers
+let pointsForBezier
+let someWord
+let bubblesArr = []
+let linesArr = []
+let initialBubblesXPos
+let initialBubblesYPos
+let canvasX = 300
+let canvasY = 500
+let degreeProbs = [45, 135]
+// Amount of elements
+let amountOfBubbles = 40
+let amountOfRects = 30
+let amountOfLines = 15
+let amountOfBeziers = 4
+let maxBubblesXpos = 0.4 * canvasX
+let maxBubblesYpos = 0.7 * canvasY
+let maxRectsXpos = 0.8 * canvasX
+let maxRectsYpos = 0.8 * canvasY
 
 function Sketch(p5) {
   p5.setup = () => {
-    // ask where colorMode goes and how many times it should be defifined
-    //pixelDensity(1)
-    //frameRate(1)
     p5.colorMode(p5.HSB, 360)
     p5.createCanvas(canvasX, canvasY)
-
     // Initialize values for first run
-    ///////////////////////////////////////////////////////    amt   -   initial  -  range
-    arrayOfRandomXposForBubbles = createArrayOfRandomNums(amountOfBubbles, 0, firstProbStepX)
-    arrayOfRandomYposForBubbles = createArrayOfRandomNums(amountOfBubbles, 0, firstProbStepY)
-
-    arrayOfInitialBubblesXPos = arrayOfRandomXposForBubbles.map(x => x)
-    arrayOfInitialBubblesYPos = arrayOfRandomYposForBubbles.map(x => x)
-
-    arrayOfRandomXposForRects = createArrayOfRandomNums(amountOfRects, 0, secondProbStepX)
-    arrayOfRandomYposForRects = createArrayOfRandomNums(amountOfRects, 0, secondProbStepY)
-    arrayOfRandomXposForLines = createArrayOfRandomNums(amountOfLines, 0, canvasX / 2)
-    arrayOfRandomYposForLines = createArrayOfRandomNums(amountOfLines, 0, canvasY / 2)
+    randomXposForBubbles = evenRandomNums(amountOfBubbles, 0, maxBubblesXpos)
+    randomYposForBubbles = evenRandomNums(amountOfBubbles, 0, maxBubblesYpos)
+    initialBubblesXPos = randomXposForBubbles.map(x => x)
+    initialBubblesYPos = randomYposForBubbles.map(x => x)
+    randomXposForRects = evenRandomNums(amountOfRects, 0, maxRectsXpos)
+    randomYposForRects = evenRandomNums(amountOfRects, 0, maxRectsYpos)
+    randomXposForLines = evenRandomNums(amountOfLines, 0, canvasX / 2)
+    randomYposForLines = evenRandomNums(amountOfLines, 0, canvasY / 2)
     colsArray = randomColor({ luminosity: 'light', format: 'hsl', count: 5 })
-    randomSizesArrForBubbles = returnArrOfRandomSizes(amountOfBubbles, 10, 80)
-    randomSizesArrForRects = returnArrOfRandomSizes(amountOfRects, 5, 30)
-    collectionOfColorTonesForBubbles = returnCollectionOfColorTones(colsArray[1], amountOfBubbles)
-    collectionOfColorTonesForRect = returnCollectionOfColorTones(colsArray[2], amountOfRects)
+    randomSizesForBubbles = returnArrOfRandomSizes(amountOfBubbles, 10, 80)
+    randomSizesForRects = returnArrOfRandomSizes(amountOfRects, 5, 30)
+    colorTonesForBubbles = returnCollectionOfColorTones(colsArray[1], amountOfBubbles)
+    colorTonesForRect = returnCollectionOfColorTones(colsArray[2], amountOfRects)
     collectionOfRotations = returnCollectionOfRotations(amountOfRects)
     linesAngle = returnlinesAngle()
-    collectionOfLengths = returnCollectionOfLengths(amountOfLines, 50)
+    collectionOfLengths = returnCollectionOfLengths(amountOfLines, 100)
     someWord = returnRandomFromArray(textArray)
     pointsForBezier = returnCollectionOfPointsForBezier(amountOfBeziers)
     collectionOfRotsForBeziers = returnCollectionOfRotations(amountOfBeziers)
 
     for (let i = 0; i < amountOfBubbles; i++) {
-      bubblesArr.push(new Bubble(arrayOfInitialBubblesXPos[i], arrayOfInitialBubblesYPos[i], arrayOfRandomXposForBubbles[i], arrayOfRandomYposForBubbles[i], randomSizesArrForBubbles[i], collectionOfColorTonesForBubbles[i]))
+      bubblesArr.push(new Bubble(initialBubblesXPos[i], initialBubblesYPos[i], randomXposForBubbles[i], randomYposForBubbles[i], randomSizesForBubbles[i], colorTonesForBubbles[i]))
     }
 
     for (let i = 0; i < amountOfLines; i++) {
-      linesArr.push(new linea(colsArray[2], linesAngle, collectionOfLengths[i], arrayOfRandomXposForLines[i], arrayOfRandomYposForLines[i]))
+      linesArr.push(new linea(colsArray[2], linesAngle, collectionOfLengths[i], randomXposForLines[i], randomYposForLines[i]))
     }
-
-
   }
 
   p5.draw = () => {
@@ -109,48 +91,47 @@ function Sketch(p5) {
     }
 
     addText(colsArray, someWord)
-    drawRects(arrayOfRandomXposForRects, arrayOfRandomYposForRects, randomSizesArrForRects, collectionOfRotations, collectionOfColorTonesForRect)
+    drawRects(randomXposForRects, randomYposForRects, randomSizesForRects, collectionOfRotations, colorTonesForRect)
   }
 
-
-  function mouseClicked() {
+  p5.mouseClicked = () => {
     // Positions
-    arrayOfRandomXposForBubbles = createArrayOfRandomNums(amountOfBubbles, 0, firstProbStepX)
-    arrayOfRandomYposForBubbles = createArrayOfRandomNums(amountOfBubbles, 0, firstProbStepY)
-    arrayOfRandomXposForRects = createArrayOfRandomNums(amountOfRects, 0, secondProbStepX)
-    arrayOfRandomYposForRects = createArrayOfRandomNums(amountOfRects, 0, secondProbStepY)
-    arrayOfRandomXposForLines = createArrayOfRandomNums(amountOfLines, 0, canvasX / 2)
-    arrayOfRandomYposForLines = createArrayOfRandomNums(amountOfLines, 0, canvasY / 2)
-    pointsForBezier = returnCollectionOfPointsForBezier(amountOfBeziers)
-    arrayOfInitialBubblesXPos = arrayOfRandomXposForBubbles.map(x => x + p5.random(-canvasX / 2, canvasX / 2))
-    arrayOfInitialBubblesYPos = arrayOfRandomYposForBubbles.map(x => x + p5.random(-canvasY / 2, canvasY / 2))
+    randomXposForBubbles = evenRandomNums(amountOfBubbles, 0, maxBubblesXpos)
+    randomYposForBubbles = evenRandomNums(amountOfBubbles, 0, maxBubblesYpos)
+    randomXposForRects = evenRandomNums(amountOfRects, 0, maxRectsXpos)
+    randomYposForRects = evenRandomNums(amountOfRects, 0, maxRectsYpos)
+    randomXposForLines = evenRandomNums(amountOfLines, 0, canvasX / 2)
+    randomYposForLines = evenRandomNums(amountOfLines, 0, canvasY / 2)
+    initialBubblesXPos = randomXposForBubbles.map(x => x + p5.random(-canvasX / 2, canvasX / 2))
+    initialBubblesYPos = randomYposForBubbles.map(x => x + p5.random(-canvasY / 2, canvasY / 2))
+    // pointsForBezier = returnCollectionOfPointsForBezier(amountOfBeziers)
 
     // Collections of colors, sizes etc..
     colsArray = randomColor({ luminosity: 'light', format: 'hsl', count: 5 })
-    randomSizesArrForBubbles = returnArrOfRandomSizes(amountOfBubbles, 10, 80)
-    randomSizesArrForRects = returnArrOfRandomSizes(amountOfRects, 5, 30)
-    collectionOfColorTonesForBubbles = returnCollectionOfColorTones(colsArray[1], amountOfBubbles)
-    collectionOfColorTonesForRect = returnCollectionOfColorTones(colsArray[2], amountOfRects)
+    randomSizesForBubbles = returnArrOfRandomSizes(amountOfBubbles, 10, 80)
+    randomSizesForRects = returnArrOfRandomSizes(amountOfRects, 5, 30)
+    colorTonesForBubbles = returnCollectionOfColorTones(colsArray[1], amountOfBubbles)
+    colorTonesForRect = returnCollectionOfColorTones(colsArray[2], amountOfRects)
     collectionOfRotations = returnCollectionOfRotations(amountOfRects)
     linesAngle = returnlinesAngle()
-    collectionOfLengths = returnCollectionOfLengths(amountOfLines, 50)
+    collectionOfLengths = returnCollectionOfLengths(amountOfLines, 60)
     someWord = returnRandomFromArray(textArray)
     collectionOfRotsForBeziers = returnCollectionOfRotations(amountOfBeziers)
     addText(colsArray, someWord)
 
     bubblesArr = []
     for (let i = 0; i < amountOfBubbles; i++) {
-      bubblesArr.push(new Bubble(arrayOfInitialBubblesXPos[i], arrayOfInitialBubblesYPos[i], arrayOfRandomXposForBubbles[i], arrayOfRandomYposForBubbles[i], randomSizesArrForBubbles[i], collectionOfColorTonesForBubbles[i]))
+      bubblesArr.push(new Bubble(initialBubblesXPos[i], initialBubblesYPos[i], randomXposForBubbles[i], randomYposForBubbles[i], randomSizesForBubbles[i], colorTonesForBubbles[i]))
     }
 
     linesArr = []
     for (let i = 0; i < amountOfLines; i++) {
-      linesArr.push(new linea(colsArray[3], linesAngle, collectionOfLengths[i], arrayOfRandomXposForLines[i], arrayOfRandomYposForLines[i]))
+      linesArr.push(new linea(colsArray[3], linesAngle, collectionOfLengths[i], randomXposForLines[i], randomYposForLines[i]))
     }
   }
 
 
-  function Bubble(initialXpos, initialYpos, indexOfArrayOfRandomXposForBubbles, indexOfArrayOfRandomYposForBubbles, randomSizesArr, collectionOfColorTonesForBubbles) {
+  function Bubble(initialXpos, initialYpos, indexOfArrayOfRandomXposForBubbles, indexOfArrayOfRandomYposForBubbles, randomSizesArr, colorTonesForBubbles) {
     this.x = indexOfArrayOfRandomXposForBubbles
     this.y = indexOfArrayOfRandomYposForBubbles
     this.target = p5.createVector(0, 0)
@@ -161,7 +142,7 @@ function Sketch(p5) {
     this.strength = 0.15 // 0.15
     this.drag = 0.90 //  0.76
     this.diameter = randomSizesArr
-    this.tone = collectionOfColorTonesForBubbles
+    this.tone = colorTonesForBubbles
 
     this.wobble = function () {
       this.target.set(this.x / 2, this.y / 2)
@@ -177,11 +158,11 @@ function Sketch(p5) {
     }
   }
 
-  function drawRects(arrayOfRandomXposForRects, arrayOfRandomYposForRects, randomSizesArr, rot, collectionOfColorTonesForRect) {
-    arrayOfRandomXposForRects.forEach((o, i) => {
-      const x = o,
-        y = arrayOfRandomYposForRects[i],
-        elementSize = randomSizesArr[i]
+  function drawRects(randomXposForRects, randomYposForRects, randomSizesArr, rot, colorTonesForRect) {
+    randomXposForRects.forEach((o, i) => {
+      const x = o
+      const y = randomYposForRects[i]
+      const elementSize = randomSizesArr[i]
       p5.noStroke()
       p5.push()
       p5.translate(x / 2, y / 2)
@@ -190,7 +171,7 @@ function Sketch(p5) {
       const c = p5.color('hsla(0, 0%, 0%, 0.04)')
       p5.fill(c)
       p5.rect(-4, -4, elementSize, elementSize)
-      p5.fill(collectionOfColorTonesForRect[i])
+      p5.fill(colorTonesForRect[i])
       p5.rect(0, 0, elementSize, elementSize)
       p5.pop()
     })
@@ -204,11 +185,10 @@ function Sketch(p5) {
   function returnCollectionOfLengths(amountOfLines, lengthMax) {
     let lengthsArray = []
     while (lengthsArray.length < amountOfLines) {
-      lengthsArray.push(p5.random(5, lengthMax))
+      lengthsArray.push(p5.random(2, lengthMax))
     }
     return lengthsArray
   }
-
 
   function linea(colsArray, linesAngle, collectionOfLengthsElement, xPos, yPos) {
     this.angle = Vector.fromAngle(linesAngle)
@@ -216,6 +196,7 @@ function Sketch(p5) {
     this.vel = p5.createVector(this.angle.x, this.angle.y)
     this.vel.mult(30)
     this.acc = p5.createVector(this.angle.x / 3, this.angle.y / 3)
+    this.strokeWeight = Math.ceil(Math.random()*10)
 
     this.slideIn = function () {
       // Mirroring
@@ -238,19 +219,18 @@ function Sketch(p5) {
       this.vel.sub(this.acc)
       this.pos.sub(this.vel)
       p5.push()
-      p5.translate(this.pos.x, this.pos.y)
-      p5.push()
-      p5.rotate(linesAngle)
-      p5.translate(-collectionOfLengthsElement / 2, 0)
-      p5.stroke(colsArray)
-      p5.strokeCap(p5.SQUARE)
-      p5.strokeWeight(6)
-      p5.line(0, 0, collectionOfLengthsElement, 0)
-      p5.pop()
+        p5.translate(this.pos.x, this.pos.y)
+        p5.push()
+          p5.rotate(linesAngle)
+          p5.translate(-collectionOfLengthsElement / 2, 0)
+          p5.stroke(colsArray)
+          p5.strokeCap(p5.SQUARE)
+          p5.strokeWeight(this.strokeWeight)
+          p5.line(0, 0, collectionOfLengthsElement, 0)
+        p5.pop()
       p5.pop()
     }
   }
-
 
   function addText(colsArray, someWord) {
     p5.textSize(60)
@@ -267,13 +247,11 @@ function Sketch(p5) {
 
   function returnCollectionOfPointsForBezier(amtOfBeziers) {
     let arr = []
-
     for (let i = 0; i < amtOfBeziers; i++) {
-
       arr.push([])
       // Here we get 2 random nums to use as the origin of the bezier
       // and then we create the anchor points by adding or subtracting some random value from x or y... 
-      const origin = createArrayOfRandomNums(2, 0, canvasX / 2),
+      const origin = evenRandomNums(2, 0, canvasX / 2),
         x = Math.round(Math.random() < 0.5 ? origin[0] : origin[0] * -1),
         y = Math.round(Math.random() < 0.5 ? origin[1] : origin[1] * -1),
         // Fist point 
@@ -286,11 +264,8 @@ function Sketch(p5) {
         anchorTwoY = y + p5.random(p5.random(canvasX / 4, canvasX * 2), p5.random(canvasX / 4, canvasX * 2)),
         controlTwoX = x + p5.random(p5.random(canvasX / 4, canvasX * 2), p5.random(canvasX / 4, canvasX * 2)),
         controlTwoY = y + p5.random(p5.random(canvasX / 4, canvasX * 2), p5.random(canvasX / 4, canvasX * 2))
-
       arr[i].push(anchorOneX, anchorOneY, controlOneX, controlOneY, anchorTwoX, anchorTwoY, controlTwoX, controlTwoY)
-
     }
-
     return arr
   }
 
@@ -308,7 +283,6 @@ function Sketch(p5) {
       // ellipse(bezierPointsArr[i][2],bezierPointsArr[i][3], 10,10)
       // ellipse(bezierPointsArr[i][6],bezierPointsArr[i][7], 10,10)
       // ellipse(bezierPointsArr[i][4],bezierPointsArr[i][5], 10,10)
-
       p5.bezier(bezierPointsArr[i][0], bezierPointsArr[i][1], bezierPointsArr[i][2], bezierPointsArr[i][3], bezierPointsArr[i][6], bezierPointsArr[i][7], bezierPointsArr[i][4], bezierPointsArr[i][5])
       p5.pop()
     }
@@ -380,17 +354,13 @@ function returnRandomFromArray(array) {
   return array[Math.floor(Math.random() * array.length)]
 }
 
-function returnRandomNumFromRange(initialVal, range) {
-  return Math.floor(Math.random() * (range - initialVal + 1)) + initialVal;
-}
+function returnRandomNumFromRange(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
-// Creates an array of randomly picket numbers based on the params you enter
-function createArrayOfRandomNums(amt, initial, range) {
+function evenRandomNums(amt, min, max) {
   const array = []
   while (array.length < amt) {
-    // Here the numers that get returned from returnRandomNumFromRange() have a 50% of being multiplied by -1
-    // so that they are evenly distributed on screen 
-    array.push(Math.round(Math.random() < 0.5 ? returnRandomNumFromRange(initial, range) : returnRandomNumFromRange(initial, range) * -1))
+  // returnRandomNumFromRange() nums have a 50% of being multiplied by -1 so they're evenly distributed on screen
+    array.push(Math.round(Math.random() < 0.5 ? returnRandomNumFromRange(min, max) : returnRandomNumFromRange(min, max) * -1))
   }
   return array
 }
