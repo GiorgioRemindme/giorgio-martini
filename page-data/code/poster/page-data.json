@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---src-templates-basic-template-js",
     "path": "/code/poster/",
-    "result": {"pageContext":{"pageContent":[{"item":"Poster"},{"item":"Javascript on HTML canvas. Interactive. 314 Characters. 25 FPS. RGB. Chromatic."},{"item":"Poster"}]}},
+    "result": {"pageContext":{"pageContent":[{"item":"Poster"},{"item":"Javascript on HTML canvas. Generative. 305 Lines. 60 FPS. HSV color mode. Chromatic."},{"item":"Poster"}]}},
     "staticQueryHashes": []}
