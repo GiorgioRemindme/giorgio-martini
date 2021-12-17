@@ -105,7 +105,6 @@ function Sketch(p5) {
     initialBubblesXPos = randomXposForBubbles.map(x => x + p5.random(-canvasX / 2, canvasX / 2))
     initialBubblesYPos = randomYposForBubbles.map(x => x + p5.random(-canvasY / 2, canvasY / 2))
     // pointsForBezier = returnCollectionOfPointsForBezier(amountOfBeziers)
-
     // Collections of colors, sizes etc..
     colsArray = randomColor({ luminosity: 'light', format: 'hsl', count: 5 })
     randomSizesForBubbles = returnArrOfRandomSizes(amountOfBubbles, 10, 80)

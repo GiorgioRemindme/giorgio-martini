@@ -45,7 +45,9 @@ const array = [
 ]
 
 function SketchThumbnail({ title, img, link, location }) {
-  const url = location.href + 'code/' || '';
+  console.log('location.href: ', location.href)
+  console.log('link: ', link)
+  const url = location.href + 'code/';
 
   return (
     <a href={url+link} className="f0 sketchThumbnail fl w-100 w-third-ns link">
@@ -58,18 +60,19 @@ function SketchThumbnail({ title, img, link, location }) {
 }
 
 // can make the grid a reusable component
+const Home = ({ location }) => {
+  return (
+    <Layout>
+      <p className="b f-subheadline">Creative and Interactive Web experiences.</p>
+      <p className="f3 mb5">Web developer with a focus on interactive and creative programming.</p>
+        <div className="cf">
+          <p className="f2 tc pt4">Archives</p>
+          {array.map(sketch => <SketchThumbnail {...sketch} location={location} />)}
+        </div>
+    </Layout>
+  )
+}
 
-const Code = ({ location }) => (
-  <Layout>
-    <p className="b f-subheadline">Creative and Interactive Web experiences.</p>
-    <p className="f3 mb5">Web developer with a focus on interactive and creative programming.</p>
-      <div className="cf">
-        <p className="f2 tc pt4">Archives</p>
-        {array.map(sketch => <SketchThumbnail {...sketch} location={location} />)}
-      </div>
-  </Layout>
-)
 
-export default Code
-
+export default Home
 // the casing of the component name sometimes makes hotreload not work
