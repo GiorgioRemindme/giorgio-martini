@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from "gatsby"
 import { activeStyle } from '../utils'
 
-console.log(activeStyle)
-
 const Header = ({isDarkMode}) => {
   const color = isDarkMode ? "_white" : "_pink"
   return (

@@ -45,13 +45,11 @@ const array = [
 ]
 
 function SketchThumbnail({ title, img, link, location }) {
-  console.log('location.href: ', location.href)
-  console.log('link: ', link)
-  const url = location.href + 'code/';
+  const url = location.href + 'code/' + link;
   console.log('url: ', url)
 
   return (
-    <a href={url+link} className="f0 sketchThumbnail fl w-100 w-third-ns link">
+    <a href={url} className="f0 sketchThumbnail fl w-100 w-third-ns link">
       <div className="relative pa1">
         <img className="w-100" src={img} />
         <p className="b white top-0 tc w-100 absolute f3 tc ma0 pa2">{title}</p>
