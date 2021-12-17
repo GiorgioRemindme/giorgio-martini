@@ -48,6 +48,7 @@ function SketchThumbnail({ title, img, link, location }) {
   console.log('location.href: ', location.href)
   console.log('link: ', link)
   const url = location.href + 'code/';
+  console.log('url: ', url)
 
   return (
     <a href={url+link} className="f0 sketchThumbnail fl w-100 w-third-ns link">
