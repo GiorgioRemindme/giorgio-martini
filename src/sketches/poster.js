@@ -3,6 +3,7 @@ import { loadableP5 as P5Wrapper } from '../components/loadable'
 import randomColor from 'randomcolor'
 import {Vector} from "p5"
 import '@fontsource/passion-one'
+import { randomFromRange } from '../utils'
 
 // Find out if we need p5, or if P5Wrapper includes p5... then remove p5 and import vector from P5Wrapper.
 let textArray = ["AMAZING", "SHORTY", "HEYA!", "YUP", "BOOM", "FANTASTIC", "BALLIN'", "FAKE", "NICE", "GREAT", "FABULOUS", "FAB", "BEAST", "UNREAL", "MARVEL", "WOW", "ZOO", "CRAZY", "FUN", "RAD", "GOOD", "GORGEOUS", "REALLY", "YEAH", "LOVELY", "SCARY", "BAM!", "HOT", "SWEET", "NEAT", "SPACE", "COOL", "PURO", "SUPERB", "HURRA", "ALRIGHT", "INSANE", "MAMA", "PERFECT", "BREATH", "GRIND", "RAW", "WHAT", "OKAY", "BOSSY", "CHECK", "DAMN", "STONED", "DADA", "CUTE", "MK3", "AKA", "GROOVY", "DONE", "WICKED", "HYFR", "GLORY", "YUMMY", "BIG", "EPIC", "EXTRA", "DROP", "HUGE", "STUNNED", "HOAX", "INK", "FIRE", "HELLA", "LOOP", "YO", "EASY", "GEIL", "BIG", "SWEET", "KING", "OUTTA", "DANDY", "YIPPEE", "PIMPIN'", "YAY", "DUH", "FEAR", "STASH", "SURE", "PHAT", "GEEZ", "BAE", "BABE", "BABY", "PONG", "YASS", "NOISE", "HA!", "FUCK", "HOLLER", "RAVE", "CLASSIC", "GENIUS", "DOOMED", "BLUNT", "HELLO", "BANG", "LOOSE", "HOLLY", "MASSIVE", "FRESH", "SHINY", "PEACHY", "A-HA", "HELP!", "BOOZE", "BOYZ", "GIRLZ", "TAMALE", "HEROIN", "SAVAGE", "VIBE", "MUTTER", "GO", "BUDHA", "FATHER", "DANDY", "HEY", "0.0009", "MARY", "GANG", "FYI", "RALLY", "FRENZY"]
@@ -79,6 +80,7 @@ function Sketch(p5) {
   }
 
   p5.draw = () => {
+
     p5.translate(p5.width / 2, p5.height / 2)
     p5.background(colsArray[0])
 
@@ -96,6 +98,7 @@ function Sketch(p5) {
 
   p5.mouseClicked = () => {
     // Positions
+    someWord = returnRandomFromArray(textArray)
     randomXposForBubbles = evenRandomNums(amountOfBubbles, 0, maxBubblesXpos)
     randomYposForBubbles = evenRandomNums(amountOfBubbles, 0, maxBubblesYpos)
     randomXposForRects = evenRandomNums(amountOfRects, 0, maxRectsXpos)
@@ -115,7 +118,7 @@ function Sketch(p5) {
     linesAngle = returnlinesAngle()
     collectionOfLengths = returnCollectionOfLengths(amountOfLines, 60)
     // collectionOfRotsForBeziers = returnCollectionOfRotations(amountOfBeziers)
-    addText(colsArray, returnRandomFromArray(textArray))
+    addText(colsArray, someWord)
 
     bubblesArr = []
     for (let i = 0; i < amountOfBubbles; i++) {
@@ -332,7 +335,7 @@ function Sketch(p5) {
 function returnCollectionOfRotations(amt) {
   let array = []
   while (array.length < amt) {
-    array.push(returnRandomNumFromRange(0,360))
+    array.push(randomFromRange(0,360))
     // array.push(p5.random(360))
   }
   return array
@@ -343,7 +346,7 @@ function returnCollectionOfRotations(amt) {
 function returnArrOfRandomSizes(amt, elmntSizeMin, elmntSizeMax) {
   let arr = []
   while (arr.length < amt) {
-    arr.push(Math.round(returnRandomNumFromRange(elmntSizeMin, elmntSizeMax)))
+    arr.push(Math.round(randomFromRange(elmntSizeMin, elmntSizeMax)))
   }
   return arr
 }
@@ -352,13 +355,11 @@ function returnRandomFromArray(array) {
   return array[Math.floor(Math.random() * array.length)]
 }
 
-function returnRandomNumFromRange(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-
 function evenRandomNums(amt, min, max) {
   const array = []
   while (array.length < amt) {
-  // returnRandomNumFromRange() nums have a 50% of being multiplied by -1 so they're evenly distributed on screen
-    array.push(Math.round(Math.random() < 0.5 ? returnRandomNumFromRange(min, max) : returnRandomNumFromRange(min, max) * -1))
+  // randomFromRange() nums have a 50% of being multiplied by -1 so they're evenly distributed on screen
+    array.push(Math.round(Math.random() < 0.5 ? randomFromRange(min, max) : randomFromRange(min, max) * -1))
   }
   return array
 }
