@@ -5,15 +5,14 @@ let canvasWidth = 400
 let canvasHeight = canvasWidth*1.5
 let row
 let grid
-let amtOfHorizontalCircles = 20
+let amtOfHorizontalCircles = 40
 let linesAmt = 50
 let ySpacing = 10
 let lineSpacing = canvasHeight/linesAmt
 const interval = 500
-let circleSizeMultiplier = 9 
+let circleSizeMultiplier = 10 
 const circleSizeProbability = 0.6   
-let rotation = 6.7
-
+let rotation = 7
 
 function Sketch(p5) {
 
@@ -26,7 +25,7 @@ function Sketch(p5) {
        display() {
          p5.noStroke()
          p5.fill(fillColor)
-         p5.ellipse(xpos, ypos, maxRadius, maxRadius)
+         p5.ellipse(xpos-p5.width/2 , ypos-p5.height/2.5 , maxRadius, maxRadius)
        },
        slide(amt) {
          if( ypos >  linesAmt * lineSpacing ) {
@@ -37,7 +36,7 @@ function Sketch(p5) {
        },
      }
     }
-    
+
     function randomLevelFromHsl(h, s, min, max) {
       // Probability of color being more lit
       const r = p5.random(1)
@@ -58,7 +57,7 @@ function Sketch(p5) {
     
     function createLine(arr, amt, startingPoint, y) {
       if( arr.length < amt) {
-         arr.push(createCircle(randomLevelFromHsl(20, 80, 20, 50), startingPoint,  y, randomCircleSize(circleSizeMultiplier, circleSizeProbability) ))
+         arr.push(createCircle(randomLevelFromHsl(200, 100, 50, 70), startingPoint,  y, randomCircleSize(circleSizeMultiplier, circleSizeProbability) ))
          createLine(arr, amt, startingPoint += p5.width/amtOfHorizontalCircles, y)
       }
       return arr
@@ -82,7 +81,7 @@ function Sketch(p5) {
     
 
   p5.setup = () => {
-    p5.createCanvas(canvasWidth, canvasHeight, /* p5.WEBGL */)
+    p5.createCanvas(canvasWidth, canvasHeight,  p5.WEBGL)
     p5.smooth() 
     p5.background("#140c28")
     grid = createGrid([], linesAmt, lineSpacing, p5)
@@ -90,9 +89,9 @@ function Sketch(p5) {
   }
 
   p5.draw = () => {
-    // p5.rotateX(rotation)
+    p5.rotateX(rotation)
     p5.frameRate(24)
-    p5.translate(lineSpacing, -lineSpacing)
+    p5.translate(lineSpacing, -lineSpacing, p5.height/3)
     p5.background("#140c28")
     grid.forEach( row => {
       row.forEach( x => {
@@ -101,7 +100,6 @@ function Sketch(p5) {
     })
   }
 }
-
 
 export default class ProbableFuture extends Component{
   render() {

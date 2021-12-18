@@ -37,10 +37,10 @@ let degreeProbs = [45, 135]
 // Amount of elements
 let amountOfBubbles = 40
 let amountOfRects = 30
-let amountOfLines = 15
+let amountOfLines = 25
 let amountOfBeziers = 4
-let maxBubblesXpos = 0.4 * canvasX
-let maxBubblesYpos = 0.7 * canvasY
+let maxBubblesXpos = 0.5 * canvasX
+let maxBubblesYpos = 0.6 * canvasY
 let maxRectsXpos = 0.8 * canvasX
 let maxRectsYpos = 0.8 * canvasY
 
@@ -51,8 +51,8 @@ function Sketch(p5) {
     // Initialize values for first run
     randomXposForBubbles = evenRandomNums(amountOfBubbles, 0, maxBubblesXpos)
     randomYposForBubbles = evenRandomNums(amountOfBubbles, 0, maxBubblesYpos)
-    initialBubblesXPos = randomXposForBubbles.map(x => x)
-    initialBubblesYPos = randomYposForBubbles.map(x => x)
+    initialBubblesXPos = randomXposForBubbles.map(x => x + p5.random(-canvasX / 2, canvasX / 2))
+    initialBubblesYPos = randomYposForBubbles.map(x => x + p5.random(-canvasY / 2, canvasY / 2))
     randomXposForRects = evenRandomNums(amountOfRects, 0, maxRectsXpos)
     randomYposForRects = evenRandomNums(amountOfRects, 0, maxRectsYpos)
     randomXposForLines = evenRandomNums(amountOfLines, 0, canvasX / 2)
@@ -66,8 +66,8 @@ function Sketch(p5) {
     linesAngle = returnlinesAngle()
     collectionOfLengths = returnCollectionOfLengths(amountOfLines, 100)
     someWord = returnRandomFromArray(textArray)
-    pointsForBezier = returnCollectionOfPointsForBezier(amountOfBeziers)
-    collectionOfRotsForBeziers = returnCollectionOfRotations(amountOfBeziers)
+    // pointsForBezier = returnCollectionOfPointsForBezier(amountOfBeziers)
+    // collectionOfRotsForBeziers = returnCollectionOfRotations(amountOfBeziers)
 
     for (let i = 0; i < amountOfBubbles; i++) {
       bubblesArr.push(new Bubble(initialBubblesXPos[i], initialBubblesYPos[i], randomXposForBubbles[i], randomYposForBubbles[i], randomSizesForBubbles[i], colorTonesForBubbles[i]))
@@ -114,9 +114,8 @@ function Sketch(p5) {
     collectionOfRotations = returnCollectionOfRotations(amountOfRects)
     linesAngle = returnlinesAngle()
     collectionOfLengths = returnCollectionOfLengths(amountOfLines, 60)
-    someWord = returnRandomFromArray(textArray)
-    collectionOfRotsForBeziers = returnCollectionOfRotations(amountOfBeziers)
-    addText(colsArray, someWord)
+    // collectionOfRotsForBeziers = returnCollectionOfRotations(amountOfBeziers)
+    addText(colsArray, returnRandomFromArray(textArray))
 
     bubblesArr = []
     for (let i = 0; i < amountOfBubbles; i++) {
@@ -167,7 +166,7 @@ function Sketch(p5) {
       p5.translate(x / 2, y / 2)
       p5.rotate(rot[i])
       p5.rectMode(p5.CENTER)
-      const c = p5.color('hsla(0, 0%, 0%, 0.04)')
+      const c = p5.color('hsla(0, 0%, 0%, 0.05)')
       p5.fill(c)
       p5.rect(-4, -4, elementSize, elementSize)
       p5.fill(colorTonesForRect[i])

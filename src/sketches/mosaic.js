@@ -15,11 +15,11 @@ let input
 let colors
 let dotsSize
 let palette = [
-  '#227c9d',
-  '#17c3b2',
-  '#ffcb77',
-  '#fef9ef',
-  '#fe6d73'
+  '#42CAFD',
+  '#66B3BA',
+  '#8EB19D',
+  '#F6EFA6',
+  '#F0D2D1'
 ]
 
 function Sketch(p5) {
@@ -110,7 +110,7 @@ function Sketch(p5) {
 
   p5.draw = () => {
     p5.frameCount > 0
-    ? p5.frameRate(5)
+    ? p5.frameRate(1)
     : p5.frameRate(1)
 
     canvas.mouseOver(() => p5.frameRate(0))
