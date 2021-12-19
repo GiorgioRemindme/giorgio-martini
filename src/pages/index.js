@@ -66,7 +66,7 @@ const Home = ({ location }) => {
       <p className="f3 mb5">Web developer with a focus on interactive and creative programming.</p>
         <div className="cf">
           <p className="f2 tc pt4">Archives</p>
-          {array.map(sketch => <SketchThumbnail {...sketch} location={location} />)}
+          {array.map((sketch, i) => <SketchThumbnail key={`s_${i}`} {...sketch} location={location} />)}
         </div>
     </Layout>
   )
