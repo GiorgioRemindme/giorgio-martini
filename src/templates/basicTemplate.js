@@ -6,6 +6,7 @@ import Fragment from "../sketches/Fragment"
 import Mosaic from '../sketches/mosaic'
 import Protocol from '../sketches/protocol'
 import Poster from '../sketches/poster'
+import Tris from '../sketches/tris'
 import "tachyons/css/tachyons.min.css"
 
 let sketches = {
@@ -15,6 +16,7 @@ let sketches = {
   mosaic: <Mosaic />,
   protocol: <Protocol />,
   poster: <Poster />,
+  tris: <Tris />,
 }
 
 const BasicTemplate = (props) => {

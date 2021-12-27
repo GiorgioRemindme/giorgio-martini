@@ -18,6 +18,7 @@
   "dependencies": {
     "@fontsource/passion-one": "^4.5.0",
     "@loadable/component": "^5.15.0",
+    "delaunator": "^5.0.0",
     "gatsby": "^3.11.1",
     "gatsby-plugin-postcss": "^4.11.0",
     "p5": "^1.4.0",

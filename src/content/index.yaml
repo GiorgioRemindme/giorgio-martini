@@ -29,6 +29,11 @@
     - item: Poster
     - item: Javascript on HTML canvas. Generative. 305 Lines. 60 FPS. HSV color mode. Chromatic.
     - item: Poster
+- path: "code/tris/"
+  content:
+    - item: Tris
+    - item: Javascript on HTML canvas. Generative. 305 Lines. 60 FPS. HSV color mode. Chromatic.
+    - item: Tris
   # links:
   #   - to: "/page2"
   #   - to: "/page5"

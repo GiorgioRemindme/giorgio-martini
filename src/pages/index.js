@@ -10,6 +10,7 @@ import mosaic from '../images/mosaic.png'
 import fragment from '../images/fragment.png' // make these jpgs
 import protocol from '../images/protocol.png'
 import poster from '../images/poster.jpg'
+import splash from '../images/splash.png'
 
 const array = [
   {
@@ -41,6 +42,11 @@ const array = [
     title: "POSTER",
     img: poster,
     link: "poster"
+  },
+  {
+    title: "Tris",
+    img: poster,
+    link: "tris"
   }
 ]
 
@@ -62,7 +68,10 @@ function SketchThumbnail({ title, img, link, location }) {
 const Home = ({ location }) => {
   return (
     <Layout>
-      <p className="b f-subheadline">Creative and Interactive Web experiences.</p>
+      <div className='relative'>
+        <img className="absolute" src={splash} />
+        <p className="b f-subheadline">Creative and Interactive Web experiences.</p>
+      </div>
       <p className="f3 mb5">Web developer with a focus on interactive and creative programming.</p>
         <div className="cf">
           <p className="f2 tc pt4">Archives</p>
@@ -71,7 +80,6 @@ const Home = ({ location }) => {
     </Layout>
   )
 }
-
 
 export default Home
 // the casing of the component name sometimes makes hotreload not work
