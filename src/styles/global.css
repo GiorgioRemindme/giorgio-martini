@@ -94,3 +94,10 @@ a:hover {
 .flex2 {
   flex: 2;
 }
+
+.splash {
+  top: -20px;
+  right: 10%;
+  width: 17rem;
+  z-index: -1;
+}

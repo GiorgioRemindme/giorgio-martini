@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import { loadableP5 as P5Wrapper } from '../components/loadable';
-import { getRandomArbitrary } from '../helpers'
-import p5, { Vector } from "p5"
-import Delaunator from 'delaunator';
+import React, { Component } from 'react'
+import { loadableP5 as P5Wrapper } from '../components/loadable'
+import { getRandomArbitrary, getRandomFromArray } from '../helpers'
+import p5, { Vector } from 'p5'
+import Delaunator from 'delaunator'
 
 let triangles
 let canvasSize = 600
@@ -10,11 +10,11 @@ let vertexAmt
 let vertex
 
 let palette = [
-  '#42CAFD',
-  '#66B3BA',
-  '#8EB19D',
-  '#F6EFA6',
-  '#F0D2D1'
+  '#413C58',
+  '#A3C4BC',
+  '#BFD7B5',
+  '#E7EFC5',
+  '#F2DDA4'
 ]
 
 function Sketch(p5) {
@@ -35,6 +35,10 @@ function Sketch(p5) {
     triangles.forEach(t => t.draw())
   }
 
+  p5.mouseClicked = () => {
+    initializeTriangulation()
+  }
+
   function initializeTriangulation() {
     triangles = [];
     let pts = [];
@@ -44,9 +48,7 @@ function Sketch(p5) {
     pts.push(p5.createVector(p5.width, p5.height))
     pts.push(p5.createVector(0, p5.height))
 
-    // add a certain nb of pts proportionally to the size of the canvas
-    // ~~ truncates a floating point number and keeps the integer part, like floor()
-    var n = 2
+    var n = 20
     for (let i = 0; i < n; i++) {
       pts.push(p5.createVector(~~p5.random(p5.width), ~~p5.random(p5.height)))
     }
@@ -55,17 +57,11 @@ function Sketch(p5) {
     // Delaunay.triangulate expect a list of vertices (which should be a bunch of two-element arrays, representing 2D Euclidean points)
     // and it will return you a giant array, arranged in triplets, representing triangles by indices into the passed array
     // Array.map function let's us create an Array of 2 elements arrays [ [x,y],[x,y],..] from our array of PVector [ PVector(x,y), PVector(x,y), ... ]
-    
     let delunaySource = pts.map(pt => [pt.x, pt.y]).flat(Infinity)
-    console.log({delunaySource})
-
     const triangulation = new Delaunator(delunaySource)
-    console.log({triangulation})
-
 
     //create Triangles object using indices returned by Delaunay.triangulate
     for (let i = 0; i < triangulation.triangles.length; i += 3) {
-      console.log("xx: ", triangulation.triangles[i])
       triangles.push(new Triangle(
         pts[triangulation.triangles[i]],
         pts[triangulation.triangles[i + 1]],
@@ -76,26 +72,19 @@ function Sketch(p5) {
 
   // class for keeping triangles from 3 PVectors
   function Triangle(_a, _b, _c) {
-    // PVectors
     this.a = _a
     this.b = _b
     this.c = _c
-    
-    // used for drawing lines on triangles
-    // number of lines to draw proportionnally to the triangle size
-    this.n = ~~(p5.dist(_a.x, _a.y, (this.b.x + this.c.x) / 2, (this.b.y + this.c.y) / 2
-    ) / p5.random(25, 50)) + 1
-    // direction point for the lines
-    this.drawTo = ~~p5.random(3);
+    this.fill = getRandomFromArray(palette)
+    this.strokeColor = getRandomFromArray(palette)
 
     this.draw = function () {
-      p5.background(255)
-      p5.fill(100);
+      p5.fill(this.fill)
       p5.triangle(this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y)
-      p5.stroke(0);
+      p5.stroke(30)
       p5.strokeJoin(p5.BEVEL)
-      p5.strokeWeight(1)
-      p5.triangle(this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y);
+      p5.strokeWeight(8)
+      p5.triangle(this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y)
     }
   }
 }

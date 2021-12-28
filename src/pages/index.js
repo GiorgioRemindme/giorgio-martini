@@ -69,7 +69,7 @@ const Home = ({ location }) => {
   return (
     <Layout>
       <div className='relative'>
-        <img className="absolute" src={splash} />
+        <img className="absolute splash" src={splash} />
         <p className="b f-subheadline">Creative and Interactive Web experiences.</p>
       </div>
       <p className="f3 mb5">Web developer with a focus on interactive and creative programming.</p>

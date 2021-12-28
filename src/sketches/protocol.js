@@ -48,7 +48,7 @@ function Sketch(p5) {
 
     function generatePositions() {
       p5.angleMode(p5.DEGREES)
-      r = getRandomArbitrary(5, opts.maxSize) // use native
+      r = getRandomArbitrary(opts.minSize, opts.maxSize) // use native
       amt = evenRandomNumber(opts.amt)
       angle = 360 / amt
       // these are some ugly magic numbers... try to fix the jumping between intro and outro other way...
@@ -163,12 +163,15 @@ function Sketch(p5) {
     c1Opts = {
       amt: 8,
       maxSize: p5.width/2,
-      cropRadius: [p5.width/16, p5.width/4],
+      minSize: p5.width/8,
+      cropRadius: [p5.width/8, p5.width/4],
       ellipse: true,
     }
+    
     c2Opts = {
       amt: 8,
       maxSize: p5.width/4,
+      minSize: p5.width/8,
       cropRadius: [p5.width/8, p5.width/3],
       strokeWeight: [10, 15],
       ellipse: true,
@@ -177,7 +180,8 @@ function Sketch(p5) {
     squaresOpts = {
       amt: 4,
       maxSize: p5.width/6,
-      strokeWeight: [4, 25],
+      minSize: p5.width/8,
+      strokeWeight: [15, 35],
       cropRadius: [p5.width/6, p5.width/4],
     }
     
@@ -191,7 +195,6 @@ function Sketch(p5) {
   }
 
   p5.draw = () => {
-    p5.frameRate(30)
     p5.translate(p5.width / 2, p5.height / 2) 
     // reset to black
     p5.blendMode(p5.REPLACE) 
