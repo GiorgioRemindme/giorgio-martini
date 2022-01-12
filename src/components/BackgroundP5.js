@@ -5,6 +5,7 @@ import { getRandomArbitrary } from "../helpers"
 let darkPurple = '#352D39'
 let pink = '#FF6978'
 const between = (x, min, max) =>  x >= min && x <= max
+let scroll
 
 function isOverGridPoint (mouseX, mouseY, x, y, range = 20) {
   return (between(mouseX, x-range, x+range) && between(mouseY, y-range, y+range))
@@ -18,7 +19,7 @@ function Sketch(p5) {
   const lineThresh = 80
   let color = pink
   let spots = []
-  let cols = 20
+  let cols
   let canvas
   let rows
 
@@ -27,6 +28,7 @@ function Sketch(p5) {
     let _y = y
     let _r = 2
     let hovered = false
+    let offset
 
     function display() {
       p5.noStroke()
@@ -47,8 +49,21 @@ function Sketch(p5) {
         hovered = true
     }
 
-    function randomWalk() {
-      _x += getRandomArbitrary(-1,1)
+    function randomWalk(scroll) {
+      offset = scroll || 0
+
+      // Mirroring
+      // if (_y > (p5.height)) {
+      //   _y = 0
+      // } else if (_y < 0) {
+      //   _y = p5.height
+      // }      
+
+    if (offset) {
+      _x += getRandomArbitrary(-offset,offset) 
+      _y += getRandomArbitrary(-offset,offset)        
+    } else 
+      _x += getRandomArbitrary(-1,1) 
       _y += getRandomArbitrary(-1,1)
     }
 
@@ -75,9 +90,10 @@ function Sketch(p5) {
     p5.background(darkPurple);
     canvas.position(0, 0).style('z-index', '-1')
     
-    cols = p5.map(p5.width, 0, 2000 , 2, 20)
+    // cols = p5.map(p5.width, 0, 2000 , 2, 20)
+    cols = ~~(p5.width / 100)
     const gridSize  = p5.width/cols
-    rows = p5.height/gridSize
+    rows = ~~(p5.height/gridSize)
 
     for (let x = 0; x < cols+1; x++) {
       for (let y = 0; y < rows+1; y++) {
@@ -91,7 +107,7 @@ function Sketch(p5) {
     p5.strokeWeight(1)
     spots.forEach((s, i) => {
       let { _x, _y, hovered } = s.values()
-      s.randomWalk()
+      s.randomWalk(scroll)
       s.display()
       if (i !== 0 && isOverGridPoint(p5.mouseX, p5.mouseY, _x, _y)) s.flash() 
       hovered && s.fade()
@@ -107,11 +123,13 @@ function Sketch(p5) {
     })
   }
 
-  // p5.mouseWheel = (event) => {
-  //   console.log(event.delta);
-  //   // uncomment to block page scrolling
-  //   return false;
-  // }
+  p5.mouseWheel = (event) => {
+    console.log("yolo delta: ", event.delta);
+
+    scroll = event.delta
+    // uncomment to block page scrolling
+    return false;
+  }
 
 }
 

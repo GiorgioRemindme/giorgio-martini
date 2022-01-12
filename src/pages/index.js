@@ -6,11 +6,12 @@ import 'tachyons/css/tachyons.min.css';
 import '../styles/global.css'
 import probable from '../images/binaryraon-400x250.jpeg'
 import lines from '../images/0808.png'
-import mosaic from '../images/mosaic.png'
+import mosaic from '../images/mosaic.jpg'
 import fragment from '../images/fragment.png' // make these jpgs
 import protocol from '../images/protocol.png'
 import poster from '../images/poster.jpg'
 import splash from '../images/splash.png'
+import tris from '../images/tris.jpg'
 
 const array = [
   {
@@ -38,21 +39,20 @@ const array = [
     img: protocol,
     link: "protocol"
   },
-  {
-    title: "POSTER",
-    img: poster,
-    link: "poster"
-  },
+  // {
+  //   title: "POSTER",
+  //   img: poster,
+  //   link: "poster"
+  // },
   {
     title: "Tris",
-    img: poster,
+    img: tris,
     link: "tris"
   }
 ]
 
 function SketchThumbnail({ title, img, link, location }) {
   const url = 'code/' + link
-  console.log('url: ', url)
 
   return (
     <Link to={url} className="f0 sketchThumbnail fl w-100 w-third-ns link">
@@ -64,7 +64,7 @@ function SketchThumbnail({ title, img, link, location }) {
   )
 }
 
-// can make the grid a reusable component
+// can make the grid a reusable component?...
 const Home = ({ location }) => {
   return (
     <Layout>
@@ -74,7 +74,7 @@ const Home = ({ location }) => {
       </div>
       <p className="f3 mb5">Web developer with a focus on interactive and creative programming.</p>
         <div className="cf">
-          <p className="f2 tc pt4">Archives</p>
+          <p className="f3 tc pt4">Made with code</p>
           {array.map((sketch, i) => <SketchThumbnail key={`s_${i}`} {...sketch} location={location} />)}
         </div>
     </Layout>

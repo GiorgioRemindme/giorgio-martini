@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { loadableP5 as P5Wrapper } from '../components/loadable';
+import { getRandomFromArray} from '../helpers'
 
 let img
 let uploadImg

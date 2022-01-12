@@ -18,7 +18,7 @@ let palette = [
 ]
 
 function Sketch(p5) {
-  // helper...
+  // make into helper...
   function getRandomFromArray(items) {
     let result = items[Math.floor(Math.random() * items.length)]
     return result
@@ -53,7 +53,6 @@ function Sketch(p5) {
       pts.push(p5.createVector(~~p5.random(p5.width), ~~p5.random(p5.height)))
     }
 
-    // Now, let's use Delaunay.js
     // Delaunay.triangulate expect a list of vertices (which should be a bunch of two-element arrays, representing 2D Euclidean points)
     // and it will return you a giant array, arranged in triplets, representing triangles by indices into the passed array
     // Array.map function let's us create an Array of 2 elements arrays [ [x,y],[x,y],..] from our array of PVector [ PVector(x,y), PVector(x,y), ... ]
@@ -70,7 +69,6 @@ function Sketch(p5) {
     }
   }
 
-  // class for keeping triangles from 3 PVectors
   function Triangle(_a, _b, _c) {
     this.a = _a
     this.b = _b
@@ -80,7 +78,6 @@ function Sketch(p5) {
 
     this.draw = function () {
       p5.fill(this.fill)
-      p5.triangle(this.a.x, this.a.y, this.b.x, this.b.y, this.c.x, this.c.y)
       p5.stroke(30)
       p5.strokeJoin(p5.BEVEL)
       p5.strokeWeight(8)

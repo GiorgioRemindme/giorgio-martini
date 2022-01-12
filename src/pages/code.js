@@ -6,7 +6,7 @@ import 'tachyons/css/tachyons.min.css';
 import '../styles/global.css'
 import probable from '../images/binaryraon-400x250.jpeg'
 import lines from '../images/0808.png'
-import mosaic from '../images/mosaic.png'
+import mosaic from '../images/mosaic.jpg'
 import fragment from '../images/fragment.png'
 import protocol from '../images/protocol.png'
 

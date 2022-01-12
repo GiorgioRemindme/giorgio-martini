@@ -14,13 +14,15 @@ let h
 let input
 let colors
 let dotsSize
+
 let palette = [
-  '#42CAFD',
-  '#66B3BA',
-  '#8EB19D',
-  '#F6EFA6',
-  '#F0D2D1'
+  '#ffa69e',
+  '#faf3dd',
+  '#b8f2e6',
+  '#aed9e0',
+  '#5e6472'
 ]
+
 
 function Sketch(p5) {
 
@@ -40,11 +42,10 @@ function Sketch(p5) {
     return result
   }
   
-  
   function randomDeg(_x, _y, w, h) {
     let randomNumber = (Math.random() * 10).toFixed(1) // make util 
     if (randomNumber >= 0 && randomNumber < 2.5) {
-      return 0
+      return Math.random()*200
     } else if (randomNumber >= 2.5 && randomNumber < 5) {
       return p5.HALF_PI
     } else if (randomNumber >= 5 && randomNumber < 7.5) {
@@ -61,16 +62,13 @@ function Sketch(p5) {
       let col1 = getRandomFromArray(colors.colors)
       p5.fill(col1)
       p5.arc(0, 0, w, h, 0, p5.HALF_PI)
-  
       p5.fill(getRandomFromArray(colors.colors))
-      p5.ellipse(0,0,dotsSize)
     } else if (randomNumber >= 3.3 && randomNumber < 6.6) {
       let col2 = getRandomFromArray(colors.colors)
       p5.fill(col2)
       p5.arc(0, 0, w, h, 0, p5.PI)
-  
+      p5.ellipse(0, 0, dotsSize)
       p5.fill(getRandomFromArray(colors.colors))
-      p5.ellipse(0,0,dotsSize)
     } else if (randomNumber >= 6.6 && randomNumber <= 10) {
       let col3 = getRandomFromArray(colors.colors)
       p5.fill(col3)
@@ -78,9 +76,7 @@ function Sketch(p5) {
       let col4 = getRandomFromArray(colors.colors)
       p5.fill(col4)
       p5.arc(0, 0, w, h, p5.PI, p5.PI + p5.HALF_PI)
-  
       p5.fill(getRandomFromArray(colors.colors))
-      p5.ellipse(0,0,dotsSize)
     } 
   }
   
@@ -95,7 +91,7 @@ function Sketch(p5) {
         let r = randomDeg()
         p5.rotate(r)
         randomSign(w,h)
-        p5.translate(0,0)
+        p5.translate(0, 0)
       p5.pop()
     }
   
@@ -110,7 +106,7 @@ function Sketch(p5) {
 
   p5.draw = () => {
     p5.frameCount > 0
-    ? p5.frameRate(1)
+    ? p5.frameRate(5)
     : p5.frameRate(1)
 
     canvas.mouseOver(() => p5.frameRate(0))
@@ -122,7 +118,7 @@ function Sketch(p5) {
   xSpacing = p5.width/gridAmount
   ySpacing = p5.height/gridAmount
   colors = getColors(palette)
-  dotsSize = p5.random(p5.width/80, p5.width/18)
+  dotsSize = p5.random(p5.width/1000, p5.width/18)
 
   for (let i = 0; i < gridAmount; i++) {
     for (let j = 0; j < gridAmount; j++) {
@@ -133,10 +129,12 @@ function Sketch(p5) {
   }
 
   p5.background(colors.bg)
+
   matrix.forEach((cell, i) => {
     p5.noStroke()
     cell[0].display(xSpacing, ySpacing)
-  })  
+  })
+
   matrix = []
   }
 }

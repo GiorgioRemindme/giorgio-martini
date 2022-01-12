@@ -9,7 +9,7 @@ let amtOfHorizontalCircles = 40
 let minCircleSize = 5
 const maxCircleSize = 10
 let rotation = 7
-let _background = `hsl(200,52%,10%)`
+let _background = '#1a1822'
 let cols = 30
 let rows = 30
 
@@ -62,7 +62,7 @@ function Sketch(p5) {
     let grid = []
     for (let x = 0; x < cols + 1; x++) {
       for (let y = 0; y < rows + 1; y++) {
-        let color = randomLevelFromHsl(220, 100, 50, 50)
+        let color = randomLevelFromHsl(230, 10, 10, 50)
         let size = randomFromRange(minCircleSize, maxCircleSize)
         grid.push(circle(color, x * p5.width / cols, y * p5.height / rows, size))
       }

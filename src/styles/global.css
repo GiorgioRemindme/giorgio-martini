@@ -96,8 +96,8 @@ a:hover {
 }
 
 .splash {
-  top: -20px;
-  right: 10%;
-  width: 17rem;
+  top: -100px;
+  right: 0%;
+  width: 27rem;
   z-index: -1;
 }
